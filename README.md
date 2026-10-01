@@ -5,7 +5,7 @@ CS60111 Geographical Information System, Autumn 2026-27. Term project 3, Group 8
 Two-date land use / land cover map of the IIT Kharagpur campus from Sentinel-2,
 and the change between them. Everything runs in Google Earth Engine from one script.
 
-![Change 2020 to 2025](results/change_2020_2025.png)
+![Change 2020 to 2025](docs/img/04_change_2020_2025.png)
 
 Magenta: pixels whose class changed between 2020 and 2025 and that belong to a changed patch at least 30 m wide.
 The large block in the south-east is the construction compound that does not exist in the 2020 image.
@@ -27,6 +27,8 @@ The OSM polygon covers the main fenced campus. Halls and quarters outside that f
 | Scene filter | tile cloud < 40 %, then cloud inside the campus < 10 % (from the SCL band) |
 | Training labels | Dynamic World V1 (`GOOGLE/DYNAMICWORLD/V1`), modal label over the same window |
 | Projection for exports | UTM 45N, EPSG:32645, 10 m |
+
+![Sentinel-2 composites](docs/img/01_sentinel2_composites.png)
 
 ## Classes
 
@@ -67,11 +69,7 @@ Putting them in vegetation would hide exactly the open-to-built conversions this
 
 All numbers come from `results/results.json`, written by `scripts/run_pipeline.py`.
 
-| LULC 2020 | LULC 2025 |
-|---|---|
-| ![LULC 2020](results/lulc_2020.png) | ![LULC 2025](results/lulc_2025.png) |
-
-Red built-up, green vegetation, sand open land, blue water.
+![LULC 2020 and 2025](docs/img/02_lulc_maps.png)
 
 ### Area by class (ha)
 
@@ -103,9 +101,11 @@ The classes add up to 467.9 ha against the 469.2 ha polygon; the rest is boundar
 | | 2020 | 2025 |
 |---|---|---|
 | Overall accuracy | 0.842 | 0.844 |
-| Kappa | 0.70 | 0.74 |
+| Kappa | 0.70 | 0.73 |
 | Producer's accuracy (built / veg / open / water) | 0.65 / 0.94 / 0.70 / 1.00 | 0.76 / 0.91 / 0.68 / 1.00 |
 | User's accuracy (built / veg / open / water) | 0.79 / 0.86 / 0.78 / 1.00 | 0.76 / 0.90 / 0.71 / 1.00 |
+
+![Confusion matrices](docs/img/05_accuracy.png)
 
 1671 training and 707 holdout pixels over both years. Water is perfect on only 11 and 13 holdout pixels, which says little.
 Built-up is the weak class in 2020: 29 of 89 built-up holdout pixels came out as vegetation.
@@ -120,12 +120,17 @@ Earth Engine Code Editor:
 3. Console: scene tables, sample counts, confusion matrices, OA, kappa, PA, UA, areas, transitions.
 4. Tasks tab: run the exports. Everything goes to `Drive/GEE_LULC/`.
 
+![Pipeline in the Code Editor](docs/img/06_code_editor_map.jpg)
+
+Class maps with the change layer (magenta) on top, after a run.
+
 Python, same pipeline, writes `results/`:
 
 ```bash
 pip install -r scripts/requirements.txt
 earthengine authenticate
 python scripts/run_pipeline.py <your-cloud-project>
+python scripts/make_figures.py . docs/img
 ```
 
 Optional independent validation: in the Code Editor script, add point layers named
@@ -138,6 +143,7 @@ The script picks them up automatically; no `class` property is needed.
 |---|---|
 | `results/results.json` | Scene lists, sample counts, confusion matrices, OA, kappa, PA, UA, importance, areas, from-to table |
 | `results/*.png` | True colour composites, class maps, change map |
+| `docs/img/` | Figures with titles and legends built from `results/` (README, slides), Code Editor screenshots |
 | `S2_composite_2020.tif`, `S2_composite_2025.tif` | 10-band reflectance composites (Drive export) |
 | `LULC_2020.tif`, `LULC_2025.tif` | Class maps, values 0-3 (Drive export) |
 | `LULC_transition_code.tif` | From-to code per pixel (Drive export) |
@@ -158,7 +164,9 @@ The script picks them up automatically; no `class` property is needed.
 gee/lulc_pipeline.js      the pipeline (Code Editor)
 gee/original/             my first drafts of the acquisition and classification scripts, kept for history
 scripts/run_pipeline.py   same pipeline through the Python API, writes results/
+scripts/make_figures.py   titled figures from results/ into docs/img/
 results/                  numbers and figures from the last run
+docs/img/                 figures and screenshots used in this README
 data/                     campus boundary from OSM
 TASKS.md                  who does what before the mid-term
 ```
