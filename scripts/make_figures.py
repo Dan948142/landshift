@@ -1,4 +1,8 @@
-"""README and slide figures from results/. Usage: python scripts/make_figures.py . docs/img"""
+"""README and slide figures from results/.
+
+Usage: python scripts/make_figures.py . docs/img [--bare]
+--bare drops the figure title and footer, for slides that carry their own.
+"""
 import json
 import sys
 from pathlib import Path
@@ -9,11 +13,12 @@ import matplotlib.pyplot as plt
 from matplotlib.patches import Patch
 
 REPO, OUT = Path(sys.argv[1]), Path(sys.argv[2])
+BARE = '--bare' in sys.argv
 OUT.mkdir(parents=True, exist_ok=True)
 RES = REPO / 'results'
 r = json.load(open(RES / 'results.json'))
 
-plt.rcParams.update({'font.family': 'Arial', 'font.size': 12, 'axes.titlesize': 14,
+plt.rcParams.update({'font.family': ['Avenir', 'Avenir Next', 'DejaVu Sans'], 'font.size': 12, 'axes.titlesize': 14,
                      'axes.spines.top': False, 'axes.spines.right': False})
 NAMES = ['Built-up', 'Vegetation', 'Open land', 'Water']
 COLS = ['#d73027', '#1a9850', '#e6d98a', '#2c7fb8']
@@ -23,8 +28,9 @@ SCENES = {y: len(r[y]['scenes']) for y in ('2020', '2025')}
 
 
 def finish(fig, name, title):
-    fig.suptitle(title, x=0.02, ha='left', fontsize=18, fontweight='bold', color=INK)
-    fig.text(0.02, 0.015, FOOT, fontsize=10, color=MUTED)
+    if not BARE:
+        fig.suptitle(title, x=0.02, ha='left', fontsize=19, fontweight='heavy', color=INK)
+        fig.text(0.02, 0.015, FOOT, fontsize=10, color=MUTED)
     fig.savefig(OUT / name, dpi=150, facecolor='white')
     plt.close(fig)
 
