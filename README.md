@@ -156,6 +156,7 @@ The script picks them up automatically; no `class` property is needed.
 
 ```
 gee/lulc_pipeline.js      the pipeline (Code Editor)
+gee/original/             my first drafts of the acquisition and classification scripts, kept for history
 scripts/run_pipeline.py   same pipeline through the Python API, writes results/
 results/                  numbers and figures from the last run
 data/                     campus boundary from OSM
@@ -166,6 +167,6 @@ TASKS.md                  who does what before the mid-term
 
 | Member | Roll no. | Contribution so far |
 |---|---|---|
-| Ashutosh Sharma | 23CS10005 | Topic selection and group registration; Earth Engine project setup; revised pipeline (OSM boundary, Dynamic World training labels, pooled Random Forest, change filter, independent validation hook, area and transition exports); Python runner; both epochs run and results; repository and documentation |
+| Ashutosh Sharma | 23CS10005 | Topic selection and group registration; Earth Engine project setup; first-draft GEE acquisition and classification scripts (`gee/original/`); revised pipeline (OSM boundary, Dynamic World training labels, pooled Random Forest, change filter, independent validation hook, area and transition exports); Python runner; both epochs run and results; repository and documentation |
 | Krishnkant Sahu | 23CS10035 | |
 | Sanskar Sovitkar | 24CS10131 | |
