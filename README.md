@@ -175,6 +175,6 @@ TASKS.md                  who does what before the mid-term
 
 | Member | Roll no. | Contribution so far |
 |---|---|---|
-| Ashutosh Sharma | 23CS10005 | Topic selection and group registration; Earth Engine project setup; first-draft GEE acquisition and classification scripts (`gee/original/`); revised pipeline (OSM boundary, Dynamic World training labels, pooled Random Forest, change filter, independent validation hook, area and transition exports); Python runner; both epochs run and results; repository and documentation |
+| Ashutosh Sharma | 23CS10005 | Earth Engine pipeline, from my first drafts (`gee/original/`) to `gee/lulc_pipeline.js`: cloud-masked Sentinel-2 composites, Dynamic World training labels, Random Forest, post-classification change. Diagnosed the first run (224 ha built-up, 139 ha of change) and fixed it: proportional sampling, one forest for both years, crops to open land, 30 m change filter. Python runner that reproduces every Console number. Both epochs run: class maps, areas, from-to table, accuracy. Change checked against NDVI. Figures, this README, the mid-term deck |
 | Krishnkant Sahu | 23CS10035 | |
 | Sanskar Sovitkar | 24CS10131 | |
