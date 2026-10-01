@@ -5,6 +5,7 @@
 // Paste into code.earthengine.google.com and press Run. Nothing has to be drawn first:
 //   - the campus boundary is OSM way 52435606, embedded below
 //   - training labels come from Dynamic World (stable, high-agreement pixels only)
+//   - one Random Forest is trained on both years and applied to both
 // Optional: hand-labelled validation points as imports named
 //   built20, veg20, open20, water20, built25, veg25, open25, water25
 // (point FeatureCollections). When present they give the independent accuracy
@@ -55,11 +56,15 @@ var ORDER = [0, 1, 2, 3];
 
 // Dynamic World label -> project class.
 // DW: 0 water, 1 trees, 2 grass, 3 flooded veg, 4 crops, 5 shrub, 6 built, 7 bare
-// Grass goes to open land: on campus it is lawns and playgrounds, not canopy.
+// Grass and crops go to open land. There is no farmland inside the fence; DW labels
+// the lawns and playgrounds as crops, and almost never as grass.
 var DW_FROM = [0, 1, 2, 3, 4, 5, 6, 7];
-var DW_TO   = [3, 1, 2, 1, 1, 1, 0, 2];
-var DW_MIN_AGREEMENT = 0.7;
-var SAMPLES_PER_CLASS = 200;
+var DW_TO   = [3, 1, 2, 1, 2, 1, 0, 2];
+var DW_MIN_AGREEMENT = 0.6;
+// Close to the campus class shares (about 22 / 70 / 7 / 0.2 %), with a floor so water
+// still has something to learn from. Equal counts per class made the forest call
+// half the campus built-up.
+var CLASS_POINTS = [300, 700, 150, 40];
 
 function addAoiCloud(img) {
   var scl = img.select('SCL');
@@ -93,15 +98,16 @@ function composite(ep) {
     .addBands(comp.normalizedDifference(['B3','B8']).rename('NDWI'));
 }
 
-// Modal Dynamic World class over the same window, kept only where at least
-// DW_MIN_AGREEMENT of the DW scenes agree with the mode.
+// Modal project class over the same window, kept only where at least
+// DW_MIN_AGREEMENT of the DW scenes agree with the mode. Remapping before the mode
+// means trees/shrub flicker does not count as disagreement.
 function dwReference(ep) {
   var dw = ee.ImageCollection('GOOGLE/DYNAMICWORLD/V1')
-    .filterBounds(aoi).filterDate(ep.start, ep.end).select('label');
+    .filterBounds(aoi).filterDate(ep.start, ep.end).select('label')
+    .map(function (i) { return i.remap(DW_FROM, DW_TO); });
   var mode = dw.mode();
   var agreement = dw.map(function (i) { return i.eq(mode); }).mean();
-  return mode.remap(DW_FROM, DW_TO).int().rename('class')
-             .updateMask(agreement.gte(DW_MIN_AGREEMENT)).clip(aoi);
+  return mode.int().rename('class').updateMask(agreement.gte(DW_MIN_AGREEMENT)).clip(aoi);
 }
 
 function printAccuracy(title, cm) {
@@ -118,32 +124,25 @@ function handLabelled(fcs) {
   }).reduce(function (a, b) { return a.merge(b); });
 }
 
-function classify(ep, hand) {
+function labelledSamples(ep, year) {
   var stack = composite(ep);
   var samples = stack.addBands(dwReference(ep)).stratifiedSample({
-    numPoints: SAMPLES_PER_CLASS, classBand: 'class', region: aoi, scale: 10,
-    seed: 42, geometries: true, tileScale: 4
-  }).randomColumn('r', 42);
-  var train = samples.filter(ee.Filter.lt('r', 0.7));
-  var holdout = samples.filter(ee.Filter.gte('r', 0.7));
+    numPoints: 0, classBand: 'class', classValues: ORDER, classPoints: CLASS_POINTS,
+    region: aoi, scale: 10, seed: 42, geometries: true, tileScale: 4
+  }).randomColumn('r', 42).map(function (f) { return f.set('year', year); });
   print(ep.label + ': DW samples per class', samples.aggregate_histogram('class'));
-  print(ep.label + ': train / holdout', train.size(), holdout.size());
+  return {stack: stack, samples: samples};
+}
 
-  var rf = ee.Classifier.smileRandomForest({numberOfTrees: 100, seed: 42}).train({
-    features: train, classProperty: 'class', inputProperties: stack.bandNames()});
-  var map = stack.classify(rf).rename('class');
-
-  printAccuracy(ep.label + ' [DW holdout, not independent]',
-    holdout.classify(rf).errorMatrix('class', 'classification', ORDER));
-
+function assess(e, year, hand) {
+  printAccuracy(year + ' [DW holdout, not independent]',
+    tested.filter(ee.Filter.eq('year', year)).errorMatrix('class', 'classification', ORDER));
   if (hand) {
-    var pts = stack.sampleRegions({collection: handLabelled(hand), properties: ['class'], scale: 10, tileScale: 4});
-    print(ep.label + ': hand-labelled points per class', pts.aggregate_histogram('class'));
-    printAccuracy(ep.label + ' [hand-labelled, independent]',
+    var pts = e.stack.sampleRegions({collection: handLabelled(hand), properties: ['class'], scale: 10, tileScale: 4});
+    print(year + ': hand-labelled points per class', pts.aggregate_histogram('class'));
+    printAccuracy(year + ' [hand-labelled, independent]',
       pts.classify(rf).errorMatrix('class', 'classification', ORDER));
   }
-  print(ep.label + ': RF variable importance', ee.Dictionary(rf.explain().get('importance')));
-  return {stack: stack, map: map, samples: samples};
 }
 
 function areaTable(img, field) {
@@ -162,32 +161,54 @@ function named(fc) {
 
 var hand20 = typeof built20 === 'undefined' ? null : [built20, veg20, open20, water20];
 var hand25 = typeof built25 === 'undefined' ? null : [built25, veg25, open25, water25];
-var e1 = classify(EPOCHS[0], hand20);
-var e2 = classify(EPOCHS[1], hand25);
+var e1 = labelledSamples(EPOCHS[0], 2020);
+var e2 = labelledSamples(EPOCHS[1], 2025);
+
+// One forest for both years, so a pixel changes class only when its spectra change,
+// not because two separately trained models disagree.
+var pooled = e1.samples.merge(e2.samples);
+var train = pooled.filter(ee.Filter.lt('r', 0.7));
+var holdout = pooled.filter(ee.Filter.gte('r', 0.7));
+print('train / holdout', train.size(), holdout.size());
+var rf = ee.Classifier.smileRandomForest({numberOfTrees: 100, seed: 42}).train({
+  features: train, classProperty: 'class', inputProperties: e1.stack.bandNames()});
+print('RF variable importance', ee.Dictionary(rf.explain().get('importance')));
+var tested = holdout.classify(rf);
+assess(e1, 2020, hand20);
+assess(e2, 2025, hand25);
+
+// 3x3 majority filter removes isolated pixels before anything is measured.
+var map20 = e1.stack.classify(rf).focalMode(1, 'square', 'pixels').rename('class');
+var map25 = e2.stack.classify(rf).focalMode(1, 'square', 'pixels').rename('class');
 
 print('Campus area (ha)', aoi.area(1).divide(10000));
-var area20 = named(areaTable(e1.map, 'class'));
-var area25 = named(areaTable(e2.map, 'class'));
+var area20 = named(areaTable(map20, 'class'));
+var area25 = named(areaTable(map25, 'class'));
 print('Area by class 2020 (ha)', area20);
 print('Area by class 2025 (ha)', area25);
 
+// Change has to survive a 1-pixel erosion. Strips under 30 m wide are roof edges
+// shifting between the two composites, not change.
+var rawChange = map20.neq(map25);
+var changed = rawChange.focalMin(1, 'square', 'pixels').focalMax(1, 'square', 'pixels')
+  .and(rawChange).rename('changed');
 // code = 10 * class2020 + class2025, so 12 is vegetation -> open land
-var code = e1.map.multiply(10).add(e2.map).rename('code');
+var code = map20.multiply(10).add(map20.where(changed, map25)).rename('code');
 var transitions = areaTable(code, 'code').map(function (f) {
   var c = ee.Number(f.get('code')).int();
   return f.set('from', CLASS_NAMES.get(c.divide(10).floor().int()), 'to', CLASS_NAMES.get(c.mod(10)));
 });
 print('From-to change (ha)', transitions);
-var changed = e1.map.neq(e2.map).rename('changed');
 print('Changed (1) vs unchanged (0), ha', areaTable(changed, 'changed'));
+print('Changed before the 30 m filter, ha', areaTable(rawChange.rename('changed'), 'changed'));
 
 var pal = ['d73027', '1a9850', 'e6d98a', '2c7fb8'];
 var outline = ee.Image().byte().paint(ee.FeatureCollection([ee.Feature(aoi)]), 1, 2);
 Map.centerObject(aoi, 15);
 Map.addLayer(e1.stack, {bands: ['B4','B3','B2'], min: 0.02, max: 0.25}, 'True colour 2020', false);
 Map.addLayer(e2.stack, {bands: ['B4','B3','B2'], min: 0.02, max: 0.25}, 'True colour 2025', false);
-Map.addLayer(e1.map, {min: 0, max: 3, palette: pal}, 'LULC 2020');
-Map.addLayer(e2.map, {min: 0, max: 3, palette: pal}, 'LULC 2025');
+Map.addLayer(map20, {min: 0, max: 3, palette: pal}, 'LULC 2020');
+Map.addLayer(map25, {min: 0, max: 3, palette: pal}, 'LULC 2025');
 Map.addLayer(changed.selfMask(), {palette: ['ff00ff']}, 'Changed pixels');
 Map.addLayer(outline, {palette: ['000000']}, 'Campus boundary (OSM)');
 
@@ -201,8 +222,8 @@ function exportTable(fc, name) {
 }
 exportImage(e1.stack.select(BANDS).toFloat(), 'S2_composite_2020');
 exportImage(e2.stack.select(BANDS).toFloat(), 'S2_composite_2025');
-exportImage(e1.map.toByte(), 'LULC_2020');
-exportImage(e2.map.toByte(), 'LULC_2025');
+exportImage(map20.toByte(), 'LULC_2020');
+exportImage(map25.toByte(), 'LULC_2025');
 exportImage(code.toByte(), 'LULC_transition_code');
 exportTable(area20, 'area_2020');
 exportTable(area25, 'area_2025');
