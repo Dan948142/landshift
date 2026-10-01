@@ -1,0 +1,374 @@
+id,year,lon,lat,label,class,confidence,map_class,reference_image,note
+P20-001,2020,87.320613,22.308761,open land,2,medium,open land,WV2 2020-03-15,dry grassland east end; few shrubs
+P20-002,2020,87.326813,22.313478,open land,2,medium,built-up,WV2 2020-03-15,bare rubble yard with unpaved track
+P20-003,2020,87.315806,22.315845,built-up,0,low,built-up,WV2 2020-03-15,small stepped concrete structure in experimental plots
+P20-004,2020,87.300157,22.308556,water,3,high,water,WV2 2020-03-15,SW tank; algae-green water
+P20-005,2020,87.303407,22.318076,water,3,medium,water,WV2 2020-03-15,narrow dark arm of pond; trees on both banks
+P20-006,2020,87.299541,22.318561,built-up,0,high,built-up,WV2 2020-03-15,roof
+P20-007,2020,87.315361,22.307622,open land,2,medium,open land,WV2 2020-03-15,dry grassland; sparse shrubs
+P20-008,2020,87.308525,22.321612,vegetation,1,medium,vegetation,WV2 2020-03-15,tree crown in courtyard between buildings
+P20-009,2020,87.303205,22.318252,water,3,low,water,WV2 2020-03-15,pond edge; dark water vs shaded canopy
+P20-010,2020,87.300358,22.308530,water,3,high,water,WV2 2020-03-15,SW tank
+P20-011,2020,87.294924,22.314226,vegetation,1,low,vegetation,WV2 2020-03-15,tree canopy with part of dark roof
+P20-012,2020,87.295400,22.315880,open land,2,low,built-up,WV2 2020-03-15,lawn partly under tree crown
+P20-013,2020,87.305282,22.318420,built-up,0,high,open land,WV2 2020-03-15,synthetic athletics track
+P20-014,2020,87.303605,22.315253,built-up,0,medium,built-up,WV2 2020-03-15,roof with courtyard edge
+P20-015,2020,87.300157,22.308808,water,3,high,water,WV2 2020-03-15,SW tank near island
+P20-016,2020,87.314386,22.312250,vegetation,1,high,vegetation,WV2 2020-03-15,dense canopy
+P20-017,2020,87.296611,22.310580,open land,2,high,open land,WV2 2020-03-15,bare sandy ground
+P20-018,2020,87.315831,22.315308,open land,2,high,open land,WV2 2020-03-15,experimental plots; dry grass
+P20-019,2020,87.297226,22.309821,open land,2,low,open land,WV2 2020-03-15,open ground with shrub and edge of hexagonal structure
+P20-020,2020,87.317242,22.313850,open land,2,high,open land,WV2 2020-03-15,bare laterite
+P20-021,2020,87.301820,22.317522,water,3,high,water,WV2 2020-03-15,large pond NE of swimming pool
+P20-022,2020,87.298664,22.311221,built-up,0,medium,built-up,WV2 2020-03-15,paved courtyard between buildings
+P20-023,2020,87.298570,22.321149,built-up,0,high,water,WV2 2020-03-15,roofs
+P20-024,2020,87.312352,22.308995,open land,2,medium,vegetation,WV2 2020-03-15,garden lawn with low plants
+P20-025,2020,87.301158,22.321175,built-up,0,high,built-up,WV2 2020-03-15,roof and porch
+P20-026,2020,87.313128,22.316631,open land,2,high,open land,WV2 2020-03-15,crop plot and dry plot
+P20-027,2020,87.312171,22.314995,built-up,0,high,built-up,WV2 2020-03-15,roof
+P20-028,2020,87.296579,22.312545,vegetation,1,high,vegetation,WV2 2020-03-15,canopy
+P20-029,2020,87.301140,22.319279,built-up,0,medium,built-up,WV2 2020-03-15,long hostel roof
+P20-030,2020,87.308345,22.322254,open land,2,high,built-up,WV2 2020-03-15,bare strip in courtyard lawn
+P20-031,2020,87.298705,22.318947,open land,2,low,vegetation,WV2 2020-03-15,yard grass with small shrubs
+P20-032,2020,87.301820,22.317824,water,3,high,water,WV2 2020-03-15,large pond
+P20-033,2020,87.303457,22.317950,water,3,medium,water,WV2 2020-03-15,pond near wooded bank
+P20-034,2020,87.301920,22.317598,water,3,high,water,WV2 2020-03-15,large pond
+P20-035,2020,87.304880,22.319538,vegetation,1,medium,vegetation,WV2 2020-03-15,canopy over road
+P20-036,2020,87.319896,22.309916,open land,2,medium,open land,WV2 2020-03-15,dry grassland east end
+P20-037,2020,87.316275,22.320236,built-up,0,medium,open land,WV2 2020-03-15,red roof edge; trees below
+P20-038,2020,87.319651,22.318039,vegetation,1,high,vegetation,WV2 2020-03-15,canopy
+P20-039,2020,87.315169,22.309073,open land,2,medium,built-up,WV2 2020-03-15,grass embankment
+P20-040,2020,87.306190,22.320572,built-up,0,low,built-up,WV2 2020-03-15,roof around planted courtyard
+P20-041,2020,87.303187,22.321470,vegetation,1,medium,built-up,WV2 2020-03-15,small tree patch at path junction
+P20-042,2020,87.305839,22.321215,vegetation,1,medium,vegetation,WV2 2020-03-15,canopy at lawn edge
+P20-043,2020,87.315827,22.317094,vegetation,1,low,water,WV2 2020-03-15,trees at pond edge; part water
+P20-044,2020,87.298570,22.320721,built-up,0,high,water,WV2 2020-03-15,dark roof
+P20-045,2020,87.317447,22.307811,open land,2,medium,open land,WV2 2020-03-15,dry grassland east end; scattered shrubs
+P20-046,2020,87.296715,22.311098,open land,2,medium,vegetation,WV2 2020-03-15,lawn below path
+P20-047,2020,87.323101,22.316334,vegetation,1,high,vegetation,WV2 2020-03-15,dense canopy
+P20-048,2020,87.325555,22.310677,open land,2,medium,open land,WV2 2020-03-15,dry grassland and bare soil east end
+P20-049,2020,87.312273,22.310098,vegetation,1,low,vegetation,WV2 2020-03-15,scrubby mix of shrubs and grass
+P20-050,2020,87.298217,22.321275,built-up,0,high,water,WV2 2020-03-15,roofs
+P20-051,2020,87.302097,22.318001,water,3,high,water,WV2 2020-03-15,large pond
+P20-052,2020,87.306686,22.309042,open land,2,high,open land,WV2 2020-03-15,grass field with path
+P20-053,2020,87.295039,22.315303,vegetation,1,medium,vegetation,WV2 2020-03-15,canopy and shrubs
+P20-054,2020,87.308002,22.316811,open land,2,high,open land,WV2 2020-03-15,grass ground with tracks
+P20-055,2020,87.302147,22.317295,water,3,high,water,WV2 2020-03-15,pond
+P20-056,2020,87.309297,22.307832,built-up,0,medium,built-up,WV2 2020-03-15,dark roof next to red roof
+P20-057,2020,87.301996,22.317900,water,3,high,water,WV2 2020-03-15,large pond
+P20-058,2020,87.300551,22.313152,built-up,0,medium,built-up,WV2 2020-03-15,light roof with tree edge
+P20-059,2020,87.321678,22.316371,built-up,0,high,built-up,WV2 2020-03-15,white building
+P20-060,2020,87.319046,22.310879,open land,2,high,open land,WV2 2020-03-15,dry grass field
+P20-061,2020,87.318636,22.311654,open land,2,high,open land,WV2 2020-03-15,dry grass field
+P20-062,2020,87.298544,22.320847,water,3,medium,water,WV2 2020-03-15,rectangular tank in courtyard
+P20-063,2020,87.301845,22.318152,water,3,high,water,WV2 2020-03-15,large pond
+P20-064,2020,87.300258,22.308656,water,3,high,water,WV2 2020-03-15,SW tank
+P20-065,2020,87.309260,22.309248,open land,2,low,built-up,WV2 2020-03-15,unpaved strip and shaded ground between buildings
+P20-066,2020,87.298543,22.321604,built-up,0,medium,built-up,WV2 2020-03-15,dark roof next to drained swimming pool
+P20-067,2020,87.301971,22.318026,water,3,high,water,WV2 2020-03-15,large pond
+P20-068,2020,87.301364,22.321544,vegetation,1,medium,built-up,WV2 2020-03-15,tree crowns between buildings
+P20-069,2020,87.311685,22.310959,built-up,0,low,vegetation,WV2 2020-03-15,paved road with trees either side
+P20-070,2020,87.302323,22.317245,water,3,low,water,WV2 2020-03-15,pond edge with small tree
+P20-071,2020,87.306669,22.313318,vegetation,1,medium,vegetation,WV2 2020-03-15,canopy near houses
+P20-072,2020,87.326968,22.311966,open land,2,medium,open land,WV2 2020-03-15,dry grassland east end
+P20-073,2020,87.305577,22.314658,vegetation,1,low,vegetation,WV2 2020-03-15,tree crown at pond edge
+P20-074,2020,87.302071,22.317446,water,3,high,water,WV2 2020-03-15,large pond
+P20-075,2020,87.308445,22.312471,open land,2,low,vegetation,WV2 2020-03-15,dry grass strip with tree edge
+P20-076,2020,87.313002,22.315214,open land,2,medium,built-up,WV2 2020-03-15,bare ground beside road
+P20-077,2020,87.301945,22.317270,water,3,low,water,WV2 2020-03-15,pond edge with tree crown
+P20-078,2020,87.302021,22.318202,water,3,high,water,WV2 2020-03-15,large pond
+P20-079,2020,87.302122,22.317875,water,3,high,water,WV2 2020-03-15,large pond
+P20-080,2020,87.295213,22.316216,open land,2,high,built-up,WV2 2020-03-15,courtyard lawn
+P20-081,2020,87.300175,22.319996,built-up,0,medium,built-up,WV2 2020-03-15,red roof edge with stair structure and path
+P20-082,2020,87.298998,22.320771,built-up,0,high,water,WV2 2020-03-15,large dark roof
+P20-083,2020,87.314099,22.311694,vegetation,1,high,vegetation,WV2 2020-03-15,canopy
+P20-084,2020,87.298491,22.320596,built-up,0,medium,vegetation,WV2 2020-03-15,dark curved roof
+P20-085,2020,87.311470,22.314729,vegetation,1,low,built-up,WV2 2020-03-15,tree shade beside building; part dry grass
+P20-086,2020,87.295416,22.313444,vegetation,1,high,vegetation,WV2 2020-03-15,canopy
+P20-087,2020,87.298192,22.321149,built-up,0,high,water,WV2 2020-03-15,roofs
+P20-088,2020,87.298897,22.320695,built-up,0,high,water,WV2 2020-03-15,large dark roof
+P20-089,2020,87.303281,22.318152,vegetation,1,medium,water,WV2 2020-03-15,canopy at channel edge
+P20-090,2020,87.295859,22.315798,open land,2,medium,built-up,WV2 2020-03-15,bare ground between buildings
+P20-091,2020,87.300434,22.308682,water,3,high,water,WV2 2020-03-15,SW tank
+P20-092,2020,87.301845,22.317346,water,3,medium,water,WV2 2020-03-15,pond with small tree
+P20-093,2020,87.302223,22.317975,vegetation,1,high,water,WV2 2020-03-15,tree island in pond
+P20-094,2020,87.298172,22.310263,vegetation,1,medium,vegetation,WV2 2020-03-15,shrub crown in scrubby yard
+P20-095,2020,87.312209,22.317296,built-up,0,high,built-up,WV2 2020-03-15,roof with rooftop units
+P20-096,2020,87.327166,22.311466,open land,2,medium,open land,WV2 2020-03-15,dry grass and bare patches east end
+P20-097,2020,87.302273,22.317346,water,3,medium,water,WV2 2020-03-15,pond edge with tree crown
+P20-098,2020,87.300258,22.308455,water,3,high,water,WV2 2020-03-15,SW tank near south bank
+P20-099,2020,87.297359,22.320140,vegetation,1,high,vegetation,WV2 2020-03-15,canopy
+P20-100,2020,87.320028,22.311097,open land,2,high,open land,WV2 2020-03-15,dry grass and bare soil
+P20-101,2020,87.298746,22.321426,built-up,0,medium,water,WV2 2020-03-15,dark roofs
+P20-102,2020,87.296518,22.309535,vegetation,1,high,vegetation,WV2 2020-03-15,canopy
+P20-103,2020,87.308540,22.309902,open land,2,low,vegetation,WV2 2020-03-15,yard with bare ground; shrubs and a small wall
+P20-104,2020,87.300056,22.308732,water,3,high,water,WV2 2020-03-15,SW tank
+P20-105,2020,87.314650,22.308620,open land,2,high,built-up,WV2 2020-03-15,bare soil
+P20-106,2020,87.304384,22.316785,vegetation,1,medium,built-up,WV2 2020-03-15,shrubs and tree crowns
+P20-107,2020,87.317944,22.308026,open land,2,medium,open land,WV2 2020-03-15,dry grassland east end
+P20-108,2020,87.305158,22.321078,vegetation,1,medium,vegetation,WV2 2020-03-15,shrub strip above building
+P20-109,2020,87.325193,22.315021,open land,2,high,open land,WV2 2020-03-15,bare reddish soil
+P20-110,2020,87.308632,22.310890,vegetation,1,high,vegetation,WV2 2020-03-15,canopy
+P20-111,2020,87.315999,22.317450,built-up,0,low,built-up,WV2 2020-03-15,building edge and lawn about half each
+P20-112,2020,87.298091,22.321224,built-up,0,high,water,WV2 2020-03-15,roof
+P20-113,2020,87.301845,22.317950,water,3,high,water,WV2 2020-03-15,large pond
+P20-114,2020,87.308886,22.316253,open land,2,high,open land,WV2 2020-03-15,grass field
+P20-115,2020,87.316570,22.308160,built-up,0,low,built-up,WV2 2020-03-15,roofless walled enclosure with grass
+P20-116,2020,87.298645,22.321023,built-up,0,medium,water,WV2 2020-03-15,dark roof beside courtyard tank
+P20-117,2020,87.299048,22.316338,water,3,medium,water,WV2 2020-03-15,small circular pond
+P20-118,2020,87.314858,22.320996,vegetation,1,low,vegetation,WV2 2020-03-15,shrubs mixed with grass
+P20-119,2020,87.302197,22.318227,water,3,medium,water,WV2 2020-03-15,large pond below embankment
+P20-120,2020,87.302119,22.318477,built-up,0,medium,built-up,WV2 2020-03-15,dark flat roof
+P20-121,2020,87.309743,22.310627,built-up,0,medium,vegetation,WV2 2020-03-15,small building with light roof
+P20-122,2020,87.326259,22.311827,open land,2,medium,vegetation,WV2 2020-03-15,dry grassland east end
+P20-123,2020,87.302197,22.317472,water,3,high,water,WV2 2020-03-15,large pond
+P20-124,2020,87.315035,22.314786,open land,2,high,open land,WV2 2020-03-15,experimental plot grass
+P20-125,2020,87.299209,22.310045,open land,2,medium,vegetation,WV2 2020-03-15,grass clearing among trees
+P20-126,2020,87.315076,22.319272,open land,2,low,open land,WV2 2020-03-15,garden lawn in front of red-roofed building
+P20-127,2020,87.302273,22.318126,vegetation,1,medium,water,WV2 2020-03-15,trees at pond edge
+P20-128,2020,87.302147,22.318126,water,3,high,water,WV2 2020-03-15,large pond
+P20-129,2020,87.297016,22.319108,vegetation,1,high,vegetation,WV2 2020-03-15,canopy
+P20-130,2020,87.318214,22.312472,open land,2,high,open land,WV2 2020-03-15,unpaved road corner and field edge
+P20-131,2020,87.302046,22.317723,water,3,high,water,WV2 2020-03-15,large pond
+P20-132,2020,87.308195,22.308523,open land,2,high,open land,WV2 2020-03-15,grass field
+P20-133,2020,87.317332,22.316303,built-up,0,high,built-up,WV2 2020-03-15,roofs
+P20-134,2020,87.320818,22.310853,open land,2,medium,open land,WV2 2020-03-15,dry grassland east end
+P20-135,2020,87.317492,22.313336,open land,2,high,open land,WV2 2020-03-15,green grass field
+P20-136,2020,87.306621,22.314302,open land,2,low,vegetation,WV2 2020-03-15,unpaved road through grass and shrubs
+P20-137,2020,87.317853,22.309522,open land,2,medium,open land,WV2 2020-03-15,dry grassland with small slab
+P20-138,2020,87.308767,22.315776,open land,2,medium,open land,WV2 2020-03-15,disturbed bare ground
+P20-139,2020,87.302172,22.317698,water,3,high,water,WV2 2020-03-15,large pond
+P20-140,2020,87.312123,22.315054,built-up,0,low,water,WV2 2020-03-15,building edge and light strip by road
+P20-141,2020,87.298746,22.320872,built-up,0,medium,water,WV2 2020-03-15,rooftop structure between roofs
+P20-142,2020,87.326880,22.312988,water,3,low,built-up,WV2 2020-03-15,turbid water in excavation pit at work yard; could be wet mud
+P20-143,2020,87.298494,22.320947,water,3,medium,water,WV2 2020-03-15,rectangular courtyard tank
+P20-144,2020,87.305492,22.319375,vegetation,1,medium,vegetation,WV2 2020-03-15,canopy
+P20-145,2020,87.302425,22.312799,open land,2,medium,built-up,WV2 2020-03-15,bare courtyard between building wings
+P20-146,2020,87.309191,22.312303,built-up,0,medium,vegetation,WV2 2020-03-15,dark roof of small house among trees
+P20-147,2020,87.297841,22.319460,built-up,0,low,built-up,WV2 2020-03-15,stair structure with red roof edge and lawn
+P20-148,2020,87.316236,22.314766,open land,2,high,open land,WV2 2020-03-15,dry field
+P20-149,2020,87.306462,22.317580,built-up,0,medium,built-up,WV2 2020-03-15,beige roof edge
+P20-150,2020,87.324289,22.310445,open land,2,medium,built-up,WV2 2020-03-15,dry grass with rubble
+P20-151,2020,87.315497,22.312669,open land,2,high,open land,WV2 2020-03-15,practice ground grass and bare strips
+P20-152,2020,87.320656,22.312895,open land,2,medium,vegetation,WV2 2020-03-15,dry grassland; scattered shrubs
+P20-153,2020,87.301945,22.317799,water,3,high,water,WV2 2020-03-15,narrow pond
+P20-154,2020,87.324421,22.311212,vegetation,1,low,open land,WV2 2020-03-15,scrub with bare patches
+P20-155,2020,87.298519,22.321325,built-up,0,high,water,WV2 2020-03-15,white-walled courtyard and roof
+P20-156,2020,87.300308,22.308782,water,3,high,water,WV2 2020-03-15,SW tank
+P20-157,2020,87.299149,22.316439,water,3,medium,water,WV2 2020-03-15,small circular pond
+P20-158,2020,87.315701,22.317144,water,3,low,water,WV2 2020-03-15,pond edge west of hostel; half trees
+P20-159,2020,87.326862,22.310994,open land,2,medium,open land,WV2 2020-03-15,dry grassland east end
+P20-160,2020,87.298418,22.321224,built-up,0,high,water,WV2 2020-03-15,roof
+P20-161,2020,87.326250,22.310696,open land,2,medium,open land,WV2 2020-03-15,dry grassland and dirt road
+P20-162,2020,87.321572,22.311741,built-up,0,high,built-up,WV2 2020-03-15,helipad asphalt
+P20-163,2020,87.315131,22.316480,open land,2,medium,open land,WV2 2020-03-15,dry grass by unpaved road
+P20-164,2020,87.301920,22.317446,water,3,high,water,WV2 2020-03-15,large pond
+P20-165,2020,87.299199,22.316313,water,3,medium,water,WV2 2020-03-15,small circular pond
+P20-166,2020,87.301330,22.314098,built-up,0,medium,vegetation,WV2 2020-03-15,light structure among trees
+P20-167,2020,87.301820,22.317698,water,3,high,water,WV2 2020-03-15,large pond
+P20-168,2020,87.298696,22.321300,built-up,0,high,water,WV2 2020-03-15,roofs
+P20-169,2020,87.300197,22.318808,open land,2,medium,vegetation,WV2 2020-03-15,lawn near building
+P20-170,2020,87.302147,22.317572,water,3,high,water,WV2 2020-03-15,large pond
+P20-171,2020,87.324935,22.310994,open land,2,medium,open land,WV2 2020-03-15,bare rocky ground with dry grass
+P20-172,2020,87.309832,22.315534,open land,2,low,open land,WV2 2020-03-15,grass with shrub strip and bare ground
+P20-173,2020,87.303930,22.320409,open land,2,low,open land,WV2 2020-03-15,clay or sand court with concrete edge
+P20-174,2020,87.306838,22.321698,open land,2,low,built-up,WV2 2020-03-15,lawn and light paved strip
+P20-175,2020,87.298620,22.321401,built-up,0,medium,water,WV2 2020-03-15,dark roof beside white courtyard
+P20-176,2020,87.313287,22.321940,vegetation,1,medium,vegetation,WV2 2020-03-15,canopy next to building
+P20-177,2020,87.304344,22.317384,open land,2,medium,open land,WV2 2020-03-15,grass embankment below stadium apron
+P20-178,2020,87.304914,22.318777,built-up,0,high,built-up,WV2 2020-03-15,synthetic athletics track
+P20-179,2020,87.300028,22.320532,open land,2,medium,built-up,WV2 2020-03-15,dry grass courtyard between red-roofed buildings
+P20-180,2020,87.309414,22.318010,vegetation,1,medium,vegetation,WV2 2020-03-15,tree crown in garden
+P20-181,2020,87.300592,22.316425,vegetation,1,medium,vegetation,WV2 2020-03-15,woodland canopy near buildings
+P25-001,2025,87.303507,22.317723,vegetation,1,high,water,WV3 2024-01-13 + S2 2024-25,canopy
+P25-002,2025,87.306621,22.314302,vegetation,1,high,vegetation,WV3 2024-01-13 + S2 2024-25,canopy
+P25-003,2025,87.301158,22.321175,built-up,0,medium,built-up,WV3 2024-01-13 + S2 2024-25,dark roof of building complex
+P25-004,2025,87.315497,22.312669,open land,2,high,open land,WV3 2024-01-13 + S2 2024-25,dry crop stubble field
+P25-005,2025,87.300081,22.308782,water,3,high,water,WV3 2024-01-13 + S2 2024-25,SW tank
+P25-006,2025,87.326259,22.311827,open land,2,medium,vegetation,WV3 2024-01-13 + S2 2024-25,dry grass east end
+P25-007,2025,87.317447,22.307811,vegetation,1,medium,vegetation,WV3 2024-01-13 + S2 2024-25,tree and shrub canopy
+P25-008,2025,87.307670,22.309619,vegetation,1,medium,built-up,WV3 2024-01-13 + S2 2024-25,tree crown beside glass-roof building
+P25-009,2025,87.296579,22.312545,vegetation,1,high,vegetation,WV3 2024-01-13 + S2 2024-25,canopy
+P25-010,2025,87.312273,22.310098,vegetation,1,medium,vegetation,WV3 2024-01-13 + S2 2024-25,canopy beside white building
+P25-011,2025,87.306190,22.320572,built-up,0,medium,built-up,WV3 2024-01-13 + S2 2024-25,roof junction with trees
+P25-012,2025,87.319196,22.313283,built-up,0,high,open land,WV3 2024-01-13 + S2 2024-25,concrete slab of building under construction in SE compound
+P25-013,2025,87.316789,22.311092,vegetation,1,high,vegetation,WV3 2024-01-13 + S2 2024-25,canopy
+P25-014,2025,87.302046,22.317346,water,3,medium,water,WV3 2024-01-13 + S2 2024-25,large pond; algae-green surface in Jan 2024
+P25-015,2025,87.305158,22.321078,vegetation,1,high,vegetation,WV3 2024-01-13 + S2 2024-25,canopy above tennis courts
+P25-016,2025,87.297016,22.319108,vegetation,1,high,vegetation,WV3 2024-01-13 + S2 2024-25,canopy
+P25-017,2025,87.301845,22.317799,water,3,medium,water,WV3 2024-01-13 + S2 2024-25,large pond near west bank; algae-green surface
+P25-018,2025,87.299073,22.316313,water,3,low,water,WV3 2024-01-13 + S2 2024-25,circular pond; green surface in Jan 2024
+P25-019,2025,87.326813,22.313478,open land,2,medium,vegetation,WV3 2024-01-13 + S2 2024-25,bare gravel clearing among trees
+P25-020,2025,87.304880,22.319538,vegetation,1,high,vegetation,WV3 2024-01-13 + S2 2024-25,canopy
+P25-021,2025,87.320028,22.311097,excluded,,,built-up,WV3 2024-01-13 + S2 2024-25,excluded: SE compound; sparse grass on sandy soil in the 13 Jan 2024 VHR but cleared or under construction in the S2 2024-25 composite; no VHR from the epoch to tell built-up from bare
+P25-022,2025,87.296611,22.310580,open land,2,high,open land,WV3 2024-01-13 + S2 2024-25,dry grass field with path
+P25-023,2025,87.312426,22.320167,built-up,0,high,water,WV3 2024-01-13 + S2 2024-25,dark roof with skylight rows in NW hostel complex
+P25-024,2025,87.317663,22.310418,open land,2,medium,open land,WV3 2024-01-13 + S2 2024-25,dry grass on cleared ground
+P25-025,2025,87.297359,22.320140,vegetation,1,high,vegetation,WV3 2024-01-13 + S2 2024-25,canopy
+P25-026,2025,87.312352,22.308995,vegetation,1,medium,vegetation,WV3 2024-01-13 + S2 2024-25,canopy beside white building
+P25-027,2025,87.310108,22.320015,built-up,0,medium,water,WV3 2024-01-13 + S2 2024-25,dark roof in building complex; shadowed in 2024
+P25-028,2025,87.302903,22.318252,vegetation,1,low,water,WV3 2024-01-13 + S2 2024-25,trees on north bank of large pond; part water
+P25-029,2025,87.313518,22.317562,open land,2,medium,built-up,WV3 2024-01-13 + S2 2024-25,garden lawn with paths
+P25-030,2025,87.315625,22.317144,vegetation,1,medium,water,WV3 2024-01-13 + S2 2024-25,vegetated former pond basin west of hostel
+P25-031,2025,87.312170,22.308573,built-up,0,low,open land,WV3 2024-01-13 + S2 2024-25,white building edge and lawn
+P25-032,2025,87.317944,22.308026,vegetation,1,medium,vegetation,WV3 2024-01-13 + S2 2024-25,scrub and trees
+P25-033,2025,87.298491,22.320596,built-up,0,high,built-up,WV3 2024-01-13 + S2 2024-25,rooftop solar array
+P25-034,2025,87.301945,22.318001,water,3,medium,water,WV3 2024-01-13 + S2 2024-25,large pond; algae-green surface
+P25-035,2025,87.299225,22.316288,water,3,low,water,WV3 2024-01-13 + S2 2024-25,circular pond; green surface; trees at edge
+P25-036,2025,87.303180,22.318252,vegetation,1,medium,water,WV3 2024-01-13 + S2 2024-25,canopy on pond bank
+P25-037,2025,87.300358,22.308606,water,3,high,water,WV3 2024-01-13 + S2 2024-25,SW tank
+P25-038,2025,87.314099,22.311694,vegetation,1,high,vegetation,WV3 2024-01-13 + S2 2024-25,canopy
+P25-039,2025,87.295416,22.313444,vegetation,1,high,vegetation,WV3 2024-01-13 + S2 2024-25,canopy
+P25-040,2025,87.308002,22.316811,open land,2,high,open land,WV3 2024-01-13 + S2 2024-25,dry grass field
+P25-041,2025,87.315751,22.317195,vegetation,1,medium,water,WV3 2024-01-13 + S2 2024-25,shrub and tree crown with dry grass
+P25-042,2025,87.306462,22.317580,built-up,0,low,built-up,WV3 2024-01-13 + S2 2024-25,courtyard between blocks with wall; mixed
+P25-043,2025,87.321572,22.311741,built-up,0,medium,built-up,WV3 2024-01-13 + S2 2024-25,helipad asphalt
+P25-044,2025,87.319651,22.318039,vegetation,1,high,vegetation,WV3 2024-01-13 + S2 2024-25,canopy
+P25-045,2025,87.320656,22.312895,excluded,,,built-up,WV3 2024-01-13 + S2 2024-25,excluded: SE compound; grass and shrubs in the 13 Jan 2024 VHR but cleared or under construction in the S2 2024-25 composite; no VHR from the epoch to tell built-up from bare
+P25-046,2025,87.318214,22.312472,open land,2,medium,open land,WV3 2024-01-13 + S2 2024-25,bare sandy ground near building
+P25-047,2025,87.311871,22.313593,open land,2,low,water,WV3 2024-01-13 + S2 2024-25,shaded lawn north of tall building; footprint edge uncertain (2024 VHR off-nadir)
+P25-048,2025,87.308135,22.315655,open land,2,high,open land,WV3 2024-01-13 + S2 2024-25,football ground
+P25-049,2025,87.301996,22.317623,water,3,medium,water,WV3 2024-01-13 + S2 2024-25,large pond; algae-green surface
+P25-050,2025,87.308445,22.312471,vegetation,1,medium,vegetation,WV3 2024-01-13 + S2 2024-25,trees over house and garden
+P25-051,2025,87.317492,22.313336,open land,2,medium,open land,WV3 2024-01-13 + S2 2024-25,dry grass beside solar panel rows
+P25-052,2025,87.317242,22.313850,built-up,0,medium,built-up,WV3 2024-01-13 + S2 2024-25,road and solar panels
+P25-053,2025,87.299765,22.311594,open land,2,low,open land,WV3 2024-01-13 + S2 2024-25,bare ground and grass with tree shadow
+P25-054,2025,87.295039,22.315303,vegetation,1,medium,vegetation,WV3 2024-01-13 + S2 2024-25,shrubs and trees
+P25-055,2025,87.302248,22.318177,water,3,medium,water,WV3 2024-01-13 + S2 2024-25,large pond near north bank
+P25-056,2025,87.309932,22.320041,built-up,0,low,water,WV3 2024-01-13 + S2 2024-25,roof in building complex in shadow of new tall blocks
+P25-057,2025,87.306838,22.321698,built-up,0,low,built-up,WV3 2024-01-13 + S2 2024-25,paved strip between solar-roof building and lawn
+P25-058,2025,87.321420,22.316590,open land,2,low,water,WV3 2024-01-13 + S2 2024-25,shaded lawn north of building in forest; footprint edge uncertain
+P25-059,2025,87.312073,22.314978,open land,2,low,water,WV3 2024-01-13 + S2 2024-25,shaded lawn north of new tall building; footprint edge uncertain
+P25-060,2025,87.310032,22.320141,built-up,0,low,water,WV3 2024-01-13 + S2 2024-25,roof and facade in building complex; shadowed
+P25-061,2025,87.303457,22.317875,vegetation,1,high,water,WV3 2024-01-13 + S2 2024-25,canopy
+P25-062,2025,87.300409,22.308707,water,3,high,water,WV3 2024-01-13 + S2 2024-25,SW tank
+P25-063,2025,87.296518,22.309535,vegetation,1,high,vegetation,WV3 2024-01-13 + S2 2024-25,canopy
+P25-064,2025,87.304914,22.318777,built-up,0,low,open land,WV3 2024-01-13 + S2 2024-25,stadium D-area red surface inside track
+P25-065,2025,87.309982,22.319940,built-up,0,low,water,WV3 2024-01-13 + S2 2024-25,dark roof in building complex; shadowed
+P25-066,2025,87.300258,22.308833,water,3,high,water,WV3 2024-01-13 + S2 2024-25,SW tank
+P25-067,2025,87.294924,22.314226,vegetation,1,low,vegetation,WV3 2024-01-13 + S2 2024-25,trees with road and small structures
+P25-068,2025,87.301895,22.317396,water,3,medium,water,WV3 2024-01-13 + S2 2024-25,large pond near curved bank
+P25-069,2025,87.312249,22.314978,open land,2,low,water,WV3 2024-01-13 + S2 2024-25,shaded lawn north of new tall building; footprint edge uncertain
+P25-070,2025,87.299174,22.316389,water,3,low,water,WV3 2024-01-13 + S2 2024-25,circular pond; green surface
+P25-071,2025,87.323101,22.316334,vegetation,1,high,vegetation,WV3 2024-01-13 + S2 2024-25,canopy
+P25-072,2025,87.314858,22.320996,vegetation,1,medium,vegetation,WV3 2024-01-13 + S2 2024-25,trees near building
+P25-073,2025,87.324289,22.310445,open land,2,medium,open land,WV3 2024-01-13 + S2 2024-25,bare reddish disturbed ground
+P25-074,2025,87.308394,22.316638,open land,2,high,open land,WV3 2024-01-13 + S2 2024-25,football ground
+P25-075,2025,87.311745,22.313543,open land,2,low,water,WV3 2024-01-13 + S2 2024-25,shaded ground beside tall building; footprint edge uncertain
+P25-076,2025,87.298948,22.316288,vegetation,1,medium,water,WV3 2024-01-13 + S2 2024-25,shrubs at circular pond west edge
+P25-077,2025,87.315520,22.311666,open land,2,medium,open land,WV3 2024-01-13 + S2 2024-25,crop and nursery plots
+P25-078,2025,87.306686,22.309042,open land,2,high,open land,WV3 2024-01-13 + S2 2024-25,dry grass field
+P25-079,2025,87.305839,22.321215,vegetation,1,low,built-up,WV3 2024-01-13 + S2 2024-25,shrubs mixed with grass
+P25-080,2025,87.301820,22.317950,water,3,medium,water,WV3 2024-01-13 + S2 2024-25,large pond near west bank
+P25-081,2025,87.296163,22.310859,open land,2,medium,open land,WV3 2024-01-13 + S2 2024-25,dry grass field edge
+P25-082,2025,87.321243,22.316540,built-up,0,low,water,WV3 2024-01-13 + S2 2024-25,north edge of building in forest; footprint edge uncertain
+P25-083,2025,87.308632,22.310890,vegetation,1,high,vegetation,WV3 2024-01-13 + S2 2024-25,canopy
+P25-084,2025,87.309191,22.312303,vegetation,1,high,vegetation,WV3 2024-01-13 + S2 2024-25,canopy
+P25-085,2025,87.303457,22.318101,vegetation,1,medium,water,WV3 2024-01-13 + S2 2024-25,canopy over the 2020 water channel on the east side of the large pond
+P25-086,2025,87.309856,22.320242,built-up,0,low,water,WV3 2024-01-13 + S2 2024-25,roof in building complex; shadowed
+P25-087,2025,87.318636,22.311654,built-up,0,low,built-up,WV3 2024-01-13 + S2 2024-25,narrow road with sheds and bare ground
+P25-088,2025,87.301895,22.317698,water,3,medium,water,WV3 2024-01-13 + S2 2024-25,large pond near west bank
+P25-089,2025,87.303331,22.318152,vegetation,1,medium,water,WV3 2024-01-13 + S2 2024-25,canopy over the 2020 water channel on the east side of the large pond
+P25-090,2025,87.303507,22.317975,vegetation,1,medium,water,WV3 2024-01-13 + S2 2024-25,canopy over the 2020 water channel on the east side of the large pond
+P25-091,2025,87.315652,22.314751,open land,2,high,open land,WV3 2024-01-13 + S2 2024-25,experimental plots
+P25-092,2025,87.314650,22.308620,open land,2,medium,built-up,WV3 2024-01-13 + S2 2024-25,dry grass and low shrubs with track
+P25-093,2025,87.308195,22.308523,open land,2,medium,built-up,WV3 2024-01-13 + S2 2024-25,dry grass near road
+P25-094,2025,87.295859,22.315798,open land,2,low,built-up,WV3 2024-01-13 + S2 2024-25,ground just south of building edge (roof displaced in 2024 VHR)
+P25-095,2025,87.299209,22.310045,vegetation,1,medium,vegetation,WV3 2024-01-13 + S2 2024-25,trees with small structure
+P25-096,2025,87.305282,22.318420,built-up,0,high,open land,WV3 2024-01-13 + S2 2024-25,synthetic athletics track
+P25-097,2025,87.311997,22.313618,open land,2,low,water,WV3 2024-01-13 + S2 2024-25,shaded lawn north of tall building; footprint edge uncertain
+P25-098,2025,87.315568,22.316316,open land,2,high,open land,WV3 2024-01-13 + S2 2024-25,dry plots
+P25-099,2025,87.320105,22.313569,excluded,,,built-up,WV3 2024-01-13 + S2 2024-25,excluded: SE compound; scrub in the 13 Jan 2024 VHR but cleared or under construction in the S2 2024-25 composite; no VHR from the epoch to tell built-up from bare
+P25-100,2025,87.295213,22.316216,open land,2,medium,built-up,WV3 2024-01-13 + S2 2024-25,courtyard ground inside building
+P25-101,2025,87.301945,22.317245,water,3,medium,water,WV3 2024-01-13 + S2 2024-25,large pond south end
+P25-102,2025,87.325193,22.315021,open land,2,medium,open land,WV3 2024-01-13 + S2 2024-25,bare ground beside building
+P25-103,2025,87.300028,22.320532,open land,2,medium,built-up,WV3 2024-01-13 + S2 2024-25,courtyard lawn between red-roofed blocks
+P25-104,2025,87.302071,22.318051,water,3,medium,water,WV3 2024-01-13 + S2 2024-25,large pond
+P25-105,2025,87.301330,22.314098,vegetation,1,medium,built-up,WV3 2024-01-13 + S2 2024-25,trees north of building
+P25-106,2025,87.302172,22.317446,water,3,medium,water,WV3 2024-01-13 + S2 2024-25,large pond near tree island
+P25-107,2025,87.318065,22.313030,open land,2,high,open land,WV3 2024-01-13 + S2 2024-25,dry grass field
+P25-108,2025,87.301794,22.317472,water,3,medium,water,WV3 2024-01-13 + S2 2024-25,large pond near west bank
+P25-109,2025,87.301662,22.320896,vegetation,1,medium,built-up,WV3 2024-01-13 + S2 2024-25,shaded vegetation below embankment
+P25-110,2025,87.302197,22.317749,vegetation,1,low,water,WV3 2024-01-13 + S2 2024-25,tree island edge in large pond; half water
+P25-111,2025,87.300283,22.308480,water,3,high,water,WV3 2024-01-13 + S2 2024-25,SW tank near south bank
+P25-112,2025,87.301324,22.309170,vegetation,1,medium,built-up,WV3 2024-01-13 + S2 2024-25,trees beside zigzag building
+P25-113,2025,87.300031,22.308682,water,3,high,water,WV3 2024-01-13 + S2 2024-25,SW tank near west bank
+P25-114,2025,87.303029,22.318278,vegetation,1,medium,water,WV3 2024-01-13 + S2 2024-25,shrubs
+P25-115,2025,87.314865,22.316265,open land,2,high,open land,WV3 2024-01-13 + S2 2024-25,dry grass field with pitch
+P25-116,2025,87.309502,22.315584,open land,2,high,open land,WV3 2024-01-13 + S2 2024-25,dry grass field with paths
+P25-117,2025,87.311685,22.310959,vegetation,1,high,vegetation,WV3 2024-01-13 + S2 2024-25,canopy
+P25-118,2025,87.324935,22.310994,vegetation,1,medium,open land,WV3 2024-01-13 + S2 2024-25,scrub by dirt road
+P25-119,2025,87.325962,22.313834,built-up,0,medium,open land,WV3 2024-01-13 + S2 2024-25,athletics track with grass strip
+P25-120,2025,87.312300,22.315079,open land,2,low,water,WV3 2024-01-13 + S2 2024-25,shaded lawn north of new tall building; footprint edge uncertain
+P25-121,2025,87.312401,22.315003,open land,2,low,water,WV3 2024-01-13 + S2 2024-25,shaded lawn north of new tall building; footprint edge uncertain
+P25-122,2025,87.309743,22.310627,vegetation,1,medium,vegetation,WV3 2024-01-13 + S2 2024-25,canopy with small structure
+P25-123,2025,87.305577,22.314658,built-up,0,low,vegetation,WV3 2024-01-13 + S2 2024-25,end of long dark roof beside trees
+P25-124,2025,87.309414,22.318010,vegetation,1,medium,vegetation,WV3 2024-01-13 + S2 2024-25,canopy above buildings
+P25-125,2025,87.300258,22.308707,water,3,high,water,WV3 2024-01-13 + S2 2024-25,SW tank
+P25-126,2025,87.302071,22.318177,water,3,medium,water,WV3 2024-01-13 + S2 2024-25,large pond north part
+P25-127,2025,87.300197,22.318808,open land,2,medium,vegetation,WV3 2024-01-13 + S2 2024-25,lawn below small blue-roofed structure
+P25-128,2025,87.304497,22.321891,open land,2,high,open land,WV3 2024-01-13 + S2 2024-25,courtyard field
+P25-129,2025,87.298705,22.318947,open land,2,medium,vegetation,WV3 2024-01-13 + S2 2024-25,garden lawn with hedge
+P25-130,2025,87.300592,22.316425,vegetation,1,high,vegetation,WV3 2024-01-13 + S2 2024-25,canopy
+P25-131,2025,87.296715,22.311098,open land,2,medium,open land,WV3 2024-01-13 + S2 2024-25,unpaved road among trees
+P25-132,2025,87.300175,22.319996,built-up,0,high,built-up,WV3 2024-01-13 + S2 2024-25,red roof
+P25-133,2025,87.301870,22.317572,water,3,medium,water,WV3 2024-01-13 + S2 2024-25,large pond west bank
+P25-134,2025,87.317161,22.308890,open land,2,medium,open land,WV3 2024-01-13 + S2 2024-25,sandy ground with small wall and tarp
+P25-135,2025,87.301140,22.319279,built-up,0,medium,built-up,WV3 2024-01-13 + S2 2024-25,long roof
+P25-136,2025,87.298172,22.310263,vegetation,1,high,vegetation,WV3 2024-01-13 + S2 2024-25,canopy
+P25-137,2025,87.303187,22.321470,vegetation,1,medium,built-up,WV3 2024-01-13 + S2 2024-25,hedge and trees beside building
+P25-138,2025,87.303583,22.317875,vegetation,1,high,water,WV3 2024-01-13 + S2 2024-25,canopy with path
+P25-139,2025,87.301364,22.321544,vegetation,1,low,built-up,WV3 2024-01-13 + S2 2024-25,tree crown in building courtyard
+P25-140,2025,87.320475,22.313865,excluded,,,open land,WV3 2024-01-13 + S2 2024-25,excluded: SE compound; shrubs and a track in the 13 Jan 2024 VHR but cleared or under construction in the S2 2024-25 composite; no VHR from the epoch to tell built-up from bare
+P25-141,2025,87.309982,22.320242,built-up,0,low,water,WV3 2024-01-13 + S2 2024-25,roof in building complex; shadowed
+P25-142,2025,87.311947,22.315054,open land,2,low,water,WV3 2024-01-13 + S2 2024-25,shaded lawn north of new tall building; footprint edge uncertain
+P25-143,2025,87.315035,22.314786,open land,2,high,open land,WV3 2024-01-13 + S2 2024-25,experimental plots
+P25-144,2025,87.309831,22.320116,built-up,0,low,water,WV3 2024-01-13 + S2 2024-25,dark roof in building complex; shadowed
+P25-145,2025,87.302021,22.317900,water,3,medium,water,WV3 2024-01-13 + S2 2024-25,large pond near west bank
+P25-146,2025,87.312073,22.315104,open land,2,low,water,WV3 2024-01-13 + S2 2024-25,shaded lawn north of new tall building; footprint edge uncertain
+P25-147,2025,87.320818,22.310853,excluded,,,built-up,WV3 2024-01-13 + S2 2024-25,excluded: SE compound; dry grass by the fence in the 13 Jan 2024 VHR but cleared or under construction in the S2 2024-25 composite; no VHR from the epoch to tell built-up from bare
+P25-148,2025,87.302147,22.317950,water,3,medium,water,WV3 2024-01-13 + S2 2024-25,large pond near tree island
+P25-149,2025,87.307362,22.321749,open land,2,low,built-up,WV3 2024-01-13 + S2 2024-25,garden path with shrubs and grass near solar-roof building
+P25-150,2025,87.322157,22.310560,open land,2,medium,open land,WV3 2024-01-13 + S2 2024-25,dry grassland east end
+P25-151,2025,87.311861,22.309749,open land,2,medium,open land,WV3 2024-01-13 + S2 2024-25,lawn near building
+P25-152,2025,87.302197,22.318051,water,3,medium,water,WV3 2024-01-13 + S2 2024-25,large pond near trees
+P25-153,2025,87.301845,22.318101,water,3,medium,water,WV3 2024-01-13 + S2 2024-25,large pond near west bank corner
+P25-154,2025,87.315902,22.317169,vegetation,1,medium,water,WV3 2024-01-13 + S2 2024-25,shrubs in vegetated former pond basin
+P25-155,2025,87.308525,22.321612,vegetation,1,medium,vegetation,WV3 2024-01-13 + S2 2024-25,trees in courtyard between buildings
+P25-156,2025,87.300157,22.308631,water,3,high,water,WV3 2024-01-13 + S2 2024-25,SW tank
+P25-157,2025,87.308540,22.309902,vegetation,1,medium,vegetation,WV3 2024-01-13 + S2 2024-25,tree crown near road
+P25-158,2025,87.312601,22.314126,open land,2,high,open land,WV3 2024-01-13 + S2 2024-25,cricket ground grass
+P25-159,2025,87.299541,22.318561,built-up,0,medium,built-up,WV3 2024-01-13 + S2 2024-25,light roof
+P25-160,2025,87.323124,22.310954,open land,2,medium,open land,WV3 2024-01-13 + S2 2024-25,dry grassland east end
+P25-161,2025,87.298543,22.321604,built-up,0,medium,built-up,WV3 2024-01-13 + S2 2024-25,dark paved surface by basketball court
+P25-162,2025,87.313287,22.321940,open land,2,low,vegetation,WV3 2024-01-13 + S2 2024-25,garden plot under tree edge
+P25-163,2025,87.321857,22.312641,open land,2,medium,open land,WV3 2024-01-13 + S2 2024-25,dry grass east end
+P25-164,2025,87.319616,22.312938,excluded,,,built-up,WV3 2024-01-13 + S2 2024-25,excluded: SE compound; sparse shrubs and tracks in the 13 Jan 2024 VHR but cleared or under construction in the S2 2024-25 composite; no VHR from the epoch to tell built-up from bare
+P25-165,2025,87.323597,22.311926,open land,2,medium,open land,WV3 2024-01-13 + S2 2024-25,dry grassland
+P25-166,2025,87.302122,22.317598,water,3,medium,water,WV3 2024-01-13 + S2 2024-25,large pond near island trees
+P25-167,2025,87.315802,22.317094,vegetation,1,medium,water,WV3 2024-01-13 + S2 2024-25,shrubs and trees
+P25-168,2025,87.316570,22.308160,open land,2,medium,built-up,WV3 2024-01-13 + S2 2024-25,yard lawn near house
+P25-169,2025,87.306669,22.313318,vegetation,1,medium,vegetation,WV3 2024-01-13 + S2 2024-25,canopy over houses
+P25-170,2025,87.303356,22.318001,vegetation,1,high,water,WV3 2024-01-13 + S2 2024-25,canopy
+P25-171,2025,87.315831,22.315308,open land,2,high,open land,WV3 2024-01-13 + S2 2024-25,experimental plots
+P25-172,2025,87.320586,22.310165,excluded,,,built-up,WV3 2024-01-13 + S2 2024-25,excluded: SE compound; bare disturbed ground by the fence in the 13 Jan 2024 VHR but cleared or under construction in the S2 2024-25 composite; no VHR from the epoch to tell built-up from bare
+P25-173,2025,87.301996,22.317774,water,3,medium,water,WV3 2024-01-13 + S2 2024-25,large pond
+P25-174,2025,87.301920,22.318202,water,3,medium,water,WV3 2024-01-13 + S2 2024-25,large pond NW corner
+P25-175,2025,87.298664,22.311221,open land,2,medium,built-up,WV3 2024-01-13 + S2 2024-25,bare courtyard between buildings
+P25-176,2025,87.309402,22.316161,open land,2,high,open land,WV3 2024-01-13 + S2 2024-25,dry grass field
+P25-177,2025,87.315076,22.319272,open land,2,low,built-up,WV3 2024-01-13 + S2 2024-25,lawn in front of red-roofed building
+P25-178,2025,87.302273,22.317295,water,3,medium,water,WV3 2024-01-13 + S2 2024-25,large pond SE part
+P25-179,2025,87.300132,22.308505,water,3,high,water,WV3 2024-01-13 + S2 2024-25,SW tank SW corner
+P25-180,2025,87.303930,22.320409,open land,2,medium,open land,WV3 2024-01-13 + S2 2024-25,sand and grass strip between sports courts
+P25-181,2025,87.308767,22.315776,open land,2,medium,open land,WV3 2024-01-13 + S2 2024-25,dry grass by blue tarp strip
+P25-182,2025,87.318313,22.309358,vegetation,1,low,vegetation,WV3 2024-01-13 + S2 2024-25,scrub with grass east end
+P25-183,2025,87.302122,22.317245,water,3,medium,water,WV3 2024-01-13 + S2 2024-25,large pond south bank
+P25-184,2025,87.302119,22.318477,built-up,0,high,built-up,WV3 2024-01-13 + S2 2024-25,roof
+P25-185,2025,87.312209,22.317296,built-up,0,high,built-up,WV3 2024-01-13 + S2 2024-25,roof with rooftop units
+P25-186,2025,87.312123,22.313568,built-up,0,low,water,WV3 2024-01-13 + S2 2024-25,east wing of tall building; footprint edge uncertain
+P25-187,2025,87.297841,22.319460,open land,2,low,built-up,WV3 2024-01-13 + S2 2024-25,lawn beside red roof and corridor
+P25-188,2025,87.317332,22.316303,built-up,0,high,built-up,WV3 2024-01-13 + S2 2024-25,curved roofs
+P25-189,2025,87.320068,22.311976,excluded,,,built-up,WV3 2024-01-13 + S2 2024-25,excluded: SE compound; bare ground with shrubs in the 13 Jan 2024 VHR but cleared or under construction in the S2 2024-25 composite; no VHR from the epoch to tell built-up from bare
+P25-190,2025,87.301996,22.317472,water,3,medium,water,WV3 2024-01-13 + S2 2024-25,large pond
+P25-191,2025,87.305492,22.319375,vegetation,1,high,vegetation,WV3 2024-01-13 + S2 2024-25,canopy
+P25-192,2025,87.314386,22.312250,vegetation,1,high,vegetation,WV3 2024-01-13 + S2 2024-25,canopy
