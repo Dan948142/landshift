@@ -58,8 +58,10 @@ Putting them in vegetation would hide exactly the open-to-built conversions this
 6. 3x3 majority filter on both class maps.
 7. Accuracy, two ways:
    - Holdout agreement with Dynamic World (the other 30 %). Not independent, because the labels and the test pixels come from the same product.
-   - Hand-labelled points (when imported): 25+ per class per year, read off Google Earth historical
-     imagery for 2020 and current imagery for 2025. These are the numbers to quote in the report.
+   - Independent points (`gee/validation_points.js`): 181 for 2020 and 184 for 2025, at least 25 per class per year.
+     A stratified random sample on the map classes, labelled on WorldView-2 imagery of 15 Mar 2020 and WorldView-3
+     imagery of 13 Jan 2024 (Esri World Imagery Wayback). These are the numbers to quote in the report.
+     Imagery, labelling rules and hard cases are in `validation/NOTES.md`.
 8. Post-classification change: `code = 10 * class2020 + class2025`, so `12` is vegetation to open land.
    A changed pixel only counts if it survives a one-pixel erosion of the change mask (then dilated back),
    so changed strips narrower than about 30 m are dropped. Without this every roof gets a ring of change
@@ -133,9 +135,9 @@ python scripts/run_pipeline.py <your-cloud-project>
 python scripts/make_figures.py . docs/img
 ```
 
-Optional independent validation: in the Code Editor script, add point layers named
-`built20, veg20, open20, water20, built25, veg25, open25, water25` (import as FeatureCollection).
-The script picks them up automatically; no `class` property is needed.
+Independent validation: paste `gee/validation_points.js` above the pipeline in the same Code Editor script.
+It defines the point layers `built20, veg20, open20, water20, built25, veg25, open25, water25`; the script
+picks them up and prints the independent confusion matrices. See `validation/NOTES.md`.
 
 ## Outputs
 
@@ -163,8 +165,12 @@ The script picks them up automatically; no `class` property is needed.
 ```
 gee/lulc_pipeline.js      the pipeline (Code Editor)
 gee/original/             my first drafts of the acquisition and classification scripts, kept for history
+gee/validation_points.js  independent validation points as the Code Editor layers built20 ... water25
 scripts/run_pipeline.py   same pipeline through the Python API, writes results/
 scripts/make_figures.py   titled figures from results/ into docs/img/
+scripts/sample_validation_points.py  draws the validation sample from results/
+scripts/export_validation.py         validation/points.csv -> gee/validation_points.js and the location figure
+validation/               the validation points with labels and notes (points.csv), labelling notes (NOTES.md)
 results/                  numbers and figures from the last run
 docs/img/                 figures and screenshots used in this README
 data/                     campus boundary from OSM
@@ -176,5 +182,5 @@ TASKS.md                  who does what before the mid-term
 | Member | Roll no. | Contribution so far |
 |---|---|---|
 | Ashutosh Sharma | 23CS10005 | Earth Engine pipeline, from my first drafts (`gee/original/`) to `gee/lulc_pipeline.js`: cloud-masked Sentinel-2 composites, Dynamic World training labels, Random Forest, post-classification change. Diagnosed the first run (224 ha built-up, 139 ha of change) and fixed it: proportional sampling, one forest for both years, crops to open land, 30 m change filter. Python runner that reproduces every Console number. Both epochs run: class maps, areas, from-to table, accuracy. Change checked against NDVI. Figures, this README, the mid-term deck |
-| Krishnkant Sahu | 23CS10035 | |
+| Krishnkant Sahu | 23CS10035 | Independent validation set: 365 points (181 for 2020, 184 for 2025, at least 25 per class per year), a stratified random sample on the map classes labelled on dated high-resolution imagery (WorldView-2, 15 Mar 2020; WorldView-3, 13 Jan 2024) after correcting its offset to Sentinel-2 (`gee/validation_points.js`, `validation/points.csv`). Labelling notes: imagery dates, rules, hard cases (south-east compound, shadows of the new buildings, algae-covered ponds, dark roofs) and a first look at the map errors (`validation/NOTES.md`). Sampling and export scripts, location figure |
 | Sanskar Sovitkar | 24CS10131 | |
