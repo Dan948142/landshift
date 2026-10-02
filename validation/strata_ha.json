@@ -1,0 +1,15 @@
+{
+ "note": "Area (ha) of each map class in the maps the validation sample was drawn from (results/ at commit 1a60e6f). These are the stratum weights; they stay fixed when the classification changes. Order: built-up, vegetation, open land, water.",
+ "2020": [
+  99.733,
+  335.205,
+  32.138,
+  0.902
+ ],
+ "2025": [
+  100.804,
+  344.065,
+  22.226,
+  0.884
+ ]
+}

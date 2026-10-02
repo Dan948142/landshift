@@ -50,7 +50,7 @@ def pair(stem, title, sub, legend=False):
 
 fig = pair('true_colour', '', [f'Nov 2019 - Feb 2020 ({SCENES["2020"]} scenes)',
                                f'Nov 2024 - Feb 2025 ({SCENES["2025"]} scenes)'])
-finish(fig, '01_sentinel2_composites.png', 'Sentinel-2 dry-season median composites, IIT Kharagpur campus')
+finish(fig, '01_sentinel2_composites.png', 'Sentinel-2 winter median composites, IIT Kharagpur campus')
 
 fig = pair('lulc', '', ['2020', '2025'], legend=True)
 finish(fig, '02_lulc_maps.png', 'Land use / land cover, Random Forest on Sentinel-2')

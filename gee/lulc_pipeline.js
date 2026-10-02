@@ -46,25 +46,29 @@ var aoi = ee.Geometry.Polygon([[
 ]]);
 
 var EPOCHS = [
-  {label: 'Epoch1_2020', start: '2019-11-01', end: '2020-03-01'},
-  {label: 'Epoch2_2025', start: '2024-11-01', end: '2025-03-01'}
+  {label: 'Epoch1_2020', start: '2019-11-01', end: '2020-03-01', dryStart: '2020-03-01', dryEnd: '2020-06-01'},
+  {label: 'Epoch2_2025', start: '2024-11-01', end: '2025-03-01', dryStart: '2025-03-01', dryEnd: '2025-06-01'}
 ];
 var BANDS = ['B2','B3','B4','B5','B6','B7','B8','B8A','B11','B12'];
 var CLOUD_AOI_MAX = 10;
+// Pre-monsoon haze is worse, and that composite only adds a few bands.
+var CLOUD_AOI_MAX_DRY = 20;
 var CLASS_NAMES = ee.List(['Built-up', 'Vegetation', 'Open land', 'Water']);
 var ORDER = [0, 1, 2, 3];
 
 // Dynamic World label -> project class.
 // DW: 0 water, 1 trees, 2 grass, 3 flooded veg, 4 crops, 5 shrub, 6 built, 7 bare
-// Grass and crops go to open land. There is no farmland inside the fence; DW labels
-// the lawns and playgrounds as crops, and almost never as grass.
+// Grass, crops and shrub go to open land. There is no farmland inside the fence; DW labels
+// the lawns and playgrounds as crops, and almost never as grass. DW's shrub on campus is the
+// dry grassland with scattered bushes in the east end, which the reference points call open land.
 var DW_FROM = [0, 1, 2, 3, 4, 5, 6, 7];
-var DW_TO   = [3, 1, 2, 1, 2, 1, 0, 2];
+var DW_TO   = [3, 1, 2, 1, 2, 2, 0, 2];
 var DW_MIN_AGREEMENT = 0.6;
 // Close to the campus class shares (about 22 / 70 / 7 / 0.2 %), with a floor so water
 // still has something to learn from. Equal counts per class made the forest call
-// half the campus built-up.
-var CLASS_POINTS = [300, 700, 150, 40];
+// half the campus built-up. Open land is sampled above its share: at its share the forest
+// rarely predicted it, and the reference points found about four times the mapped area.
+var CLASS_POINTS = [300, 700, 450, 40];
 
 function addAoiCloud(img) {
   var scl = img.select('SCL');
@@ -80,14 +84,14 @@ function prep(img) {
                      .copyProperties(img, ['system:time_start']));
 }
 
-function composite(ep) {
+function seasonal(label, start, end, cloudMax) {
   var col = ee.ImageCollection('COPERNICUS/S2_SR_HARMONIZED')
-    .filterBounds(aoi).filterDate(ep.start, ep.end)
+    .filterBounds(aoi).filterDate(start, end)
     .filter(ee.Filter.lt('CLOUDY_PIXEL_PERCENTAGE', 40))
     .map(addAoiCloud)
-    .filter(ee.Filter.lt('aoi_cloud_pct', CLOUD_AOI_MAX));
-  print(ep.label + ': scenes used', col.size());
-  print(ep.label + ': scene table', ee.FeatureCollection(col.map(function (i) {
+    .filter(ee.Filter.lt('aoi_cloud_pct', cloudMax));
+  print(label + ': scenes used', col.size());
+  print(label + ': scene table', ee.FeatureCollection(col.map(function (i) {
     return ee.Feature(null, {date: i.date().format('YYYY-MM-dd'), tile: i.get('MGRS_TILE'),
       tile_cloud_pct: i.get('CLOUDY_PIXEL_PERCENTAGE'), aoi_cloud_pct: i.get('aoi_cloud_pct')});
   })));
@@ -98,9 +102,24 @@ function composite(ep) {
     .addBands(comp.normalizedDifference(['B3','B8']).rename('NDWI'));
 }
 
+// Winter composite plus two things DW labels alone cannot separate lawns from canopy with:
+// 3x3 texture (canopy is rough, lawns are smooth) and the March-May composite, when grass
+// dries out and trees stay green.
+function composite(ep) {
+  var comp = seasonal(ep.label, ep.start, ep.end, CLOUD_AOI_MAX);
+  var dry = seasonal(ep.label + ' pre-monsoon', ep.dryStart, ep.dryEnd, CLOUD_AOI_MAX_DRY)
+    .select(['B4','B8','B11','B12','NDVI','NDBI','NDWI'], ['dB4','dB8','dB11','dB12','dNDVI','dNDBI','dNDWI']);
+  var sd = ee.Reducer.stdDev();
+  return comp
+    .addBands(comp.select('NDVI').reduceNeighborhood(sd, ee.Kernel.square(1)).rename('NDVI_sd'))
+    .addBands(comp.select('B8').reduceNeighborhood(sd, ee.Kernel.square(1)).rename('B8_sd'))
+    .addBands(dry)
+    .addBands(comp.select('NDVI').subtract(dry.select('dNDVI')).rename('NDVI_drop'));
+}
+
 // Modal project class over the same window, kept only where at least
 // DW_MIN_AGREEMENT of the DW scenes agree with the mode. Remapping before the mode
-// means trees/shrub flicker does not count as disagreement.
+// means grass/crops/bare flicker does not count as disagreement.
 function dwReference(ep) {
   var dw = ee.ImageCollection('GOOGLE/DYNAMICWORLD/V1')
     .filterBounds(aoi).filterDate(ep.start, ep.end).select('label')

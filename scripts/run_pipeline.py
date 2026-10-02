@@ -20,18 +20,19 @@ ring = json.load(open(ROOT / 'data' / 'iitkgp_campus_osm.geojson'))['coordinates
 aoi = ee.Geometry.Polygon([[[round(x, 5), round(y, 5)] for x, y in ring]])
 
 EPOCHS = [
-    {'label': 'Epoch1_2020', 'start': '2019-11-01', 'end': '2020-03-01'},
-    {'label': 'Epoch2_2025', 'start': '2024-11-01', 'end': '2025-03-01'},
+    {'label': 'Epoch1_2020', 'start': '2019-11-01', 'end': '2020-03-01', 'dry_start': '2020-03-01', 'dry_end': '2020-06-01'},
+    {'label': 'Epoch2_2025', 'start': '2024-11-01', 'end': '2025-03-01', 'dry_start': '2025-03-01', 'dry_end': '2025-06-01'},
 ]
 BANDS = ['B2', 'B3', 'B4', 'B5', 'B6', 'B7', 'B8', 'B8A', 'B11', 'B12']
 CLOUD_AOI_MAX = 10
+CLOUD_AOI_MAX_DRY = 20
 NAMES = ['Built-up', 'Vegetation', 'Open land', 'Water']
 NAMES_LOWER = [n.lower() for n in NAMES]
 ORDER = [0, 1, 2, 3]
 DW_FROM = [0, 1, 2, 3, 4, 5, 6, 7]
-DW_TO = [3, 1, 2, 1, 2, 1, 0, 2]
+DW_TO = [3, 1, 2, 1, 2, 2, 0, 2]
 DW_MIN_AGREEMENT = 0.6
-CLASS_POINTS = [300, 700, 150, 40]
+CLASS_POINTS = [300, 700, 450, 40]
 
 
 def add_aoi_cloud(img):
@@ -48,20 +49,31 @@ def prep(img):
                     .copyProperties(img, ['system:time_start']))
 
 
-def composite(ep, report):
+def seasonal(start, end, cloud_max, scenes_out):
     col = (ee.ImageCollection('COPERNICUS/S2_SR_HARMONIZED')
-           .filterBounds(aoi).filterDate(ep['start'], ep['end'])
+           .filterBounds(aoi).filterDate(start, end)
            .filter(ee.Filter.lt('CLOUDY_PIXEL_PERCENTAGE', 40))
            .map(add_aoi_cloud)
-           .filter(ee.Filter.lt('aoi_cloud_pct', CLOUD_AOI_MAX)))
+           .filter(ee.Filter.lt('aoi_cloud_pct', cloud_max)))
     scenes = ee.FeatureCollection(col.map(lambda i: ee.Feature(None, {
         'date': i.date().format('YYYY-MM-dd'), 'tile': i.get('MGRS_TILE'),
         'tile_cloud_pct': i.get('CLOUDY_PIXEL_PERCENTAGE'), 'aoi_cloud_pct': i.get('aoi_cloud_pct')})))
-    report['scenes'] = [f['properties'] for f in scenes.getInfo()['features']]
+    scenes_out.extend(f['properties'] for f in scenes.getInfo()['features'])
     comp = col.map(prep).median().clip(aoi)
     return (comp.addBands(comp.normalizedDifference(['B8', 'B4']).rename('NDVI'))
                 .addBands(comp.normalizedDifference(['B11', 'B8']).rename('NDBI'))
                 .addBands(comp.normalizedDifference(['B3', 'B8']).rename('NDWI')))
+
+
+def composite(ep, report):
+    comp = seasonal(ep['start'], ep['end'], CLOUD_AOI_MAX, report.setdefault('scenes', []))
+    dry = seasonal(ep['dry_start'], ep['dry_end'], CLOUD_AOI_MAX_DRY, report.setdefault('scenes_dry', [])).select(
+        ['B4', 'B8', 'B11', 'B12', 'NDVI', 'NDBI', 'NDWI'], ['dB4', 'dB8', 'dB11', 'dB12', 'dNDVI', 'dNDBI', 'dNDWI'])
+    sd = ee.Reducer.stdDev()
+    return (comp.addBands(comp.select('NDVI').reduceNeighborhood(sd, ee.Kernel.square(1)).rename('NDVI_sd'))
+                .addBands(comp.select('B8').reduceNeighborhood(sd, ee.Kernel.square(1)).rename('B8_sd'))
+                .addBands(dry)
+                .addBands(comp.select('NDVI').subtract(dry.select('dNDVI')).rename('NDVI_drop')))
 
 
 def dw_reference(ep):
@@ -100,8 +112,8 @@ def hand_points(year):
 def area_weighted(points, area_ha):
     """Stratified estimators (Olofsson et al. 2014; Stehman 2014 for strata that differ from the map).
 
-    points: (stratum, reference, map) per point. The strata are the map classes the sample was drawn
-    from; a few points now fall on another class of the final map, so stratum and map class are kept apart.
+    points: (stratum, reference, map) per point. The strata are the classes of the earlier map the sample
+    was drawn from (validation/strata_ha.json), so stratum and map class are kept apart.
     """
     total = sum(area_ha)
     w = [a / total for a in area_ha]
@@ -164,8 +176,9 @@ m2 = s2.classify(rf).focalMode(1, 'square', 'pixels').rename('class')
 results['2020']['area_ha'] = area_table(m1, 'class')
 results['2025']['area_ha'] = area_table(m2, 'class')
 # Independent points. Same matrix the Code Editor prints (unfiltered classification), then the
-# filtered map that the areas come from, weighted by class area: the sample is stratified by
+# filtered map that the areas come from, weighted by stratum area: the sample is stratified by
 # map class and water, 0.2 % of the campus, has a third of the points.
+STRATA_HA = json.load(open(ROOT / 'validation' / 'strata_ha.json'))
 for stack, final, year in ((s1, m1, 2020), (s2, m2, 2025)):
     pts = hand_points(year)
     results[str(year)]['independent_accuracy'] = accuracy(
@@ -174,8 +187,7 @@ for stack, final, year in ((s1, m1, 2020), (s2, m2, 2025)):
     on_map = final.rename('map').sampleRegions(collection=pts, properties=['class', 'stratum'], scale=10, tileScale=4)
     sampled = [(f['properties']['stratum'], f['properties']['class'], f['properties']['map'])
                for f in on_map.getInfo()['features']]
-    areas = {g['class']: g['sum'] for g in results[str(year)]['area_ha']}
-    results[str(year)]['independent_area_weighted'] = area_weighted(sampled, [areas.get(c, 0) for c in ORDER])
+    results[str(year)]['independent_area_weighted'] = area_weighted(sampled, STRATA_HA[str(year)])
 # Change has to survive a 1-pixel erosion. Strips under 30 m wide are roof edges
 # shifting between the two composites, not change.
 raw_change = m1.neq(m2)
