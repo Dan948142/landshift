@@ -2,6 +2,7 @@
 
 Usage: python scripts/run_pipeline.py <cloud-project> [out_dir]
 """
+import csv
 import json
 import sys
 import urllib.request
@@ -14,7 +15,8 @@ OUT = Path(sys.argv[2] if len(sys.argv) > 2 else 'results')
 OUT.mkdir(parents=True, exist_ok=True)
 ee.Initialize(project=PROJECT)
 
-ring = json.load(open(Path(__file__).parent.parent / 'data' / 'iitkgp_campus_osm.geojson'))['coordinates'][0]
+ROOT = Path(__file__).parent.parent
+ring = json.load(open(ROOT / 'data' / 'iitkgp_campus_osm.geojson'))['coordinates'][0]
 aoi = ee.Geometry.Polygon([[[round(x, 5), round(y, 5)] for x, y in ring]])
 
 EPOCHS = [
@@ -24,6 +26,7 @@ EPOCHS = [
 BANDS = ['B2', 'B3', 'B4', 'B5', 'B6', 'B7', 'B8', 'B8A', 'B11', 'B12']
 CLOUD_AOI_MAX = 10
 NAMES = ['Built-up', 'Vegetation', 'Open land', 'Water']
+NAMES_LOWER = [n.lower() for n in NAMES]
 ORDER = [0, 1, 2, 3]
 DW_FROM = [0, 1, 2, 3, 4, 5, 6, 7]
 DW_TO = [3, 1, 2, 1, 2, 1, 0, 2]
@@ -86,6 +89,47 @@ def labelled_samples(ep, year, report):
     return stack, samples
 
 
+def hand_points(year):
+    rows = [r for r in csv.DictReader(open(ROOT / 'validation' / 'points.csv'))
+            if r['year'] == str(year) and r['class']]
+    return ee.FeatureCollection([ee.Feature(ee.Geometry.Point([float(r['lon']), float(r['lat'])]),
+                                            {'class': int(r['class']), 'stratum': NAMES_LOWER.index(r['map_class'])})
+                                 for r in rows])
+
+
+def area_weighted(points, area_ha):
+    """Stratified estimators (Olofsson et al. 2014; Stehman 2014 for strata that differ from the map).
+
+    points: (stratum, reference, map) per point. The strata are the map classes the sample was drawn
+    from; a few points now fall on another class of the final map, so stratum and map class are kept apart.
+    """
+    total = sum(area_ha)
+    w = [a / total for a in area_ha]
+    n = [sum(1 for s, _, _ in points if s == h) for h in ORDER]
+
+    def mean(h, f):
+        return sum(f(r, m) for s, r, m in points if s == h) / n[h]
+
+    def estimate(f):
+        return sum(w[h] * mean(h, f) for h in ORDER)
+
+    def ratio(num, den):
+        d = estimate(den)
+        return estimate(num) / d if d else None
+
+    def ci(f, scale=1):
+        se = sum(w[h] ** 2 * mean(h, f) * (1 - mean(h, f)) / (n[h] - 1) for h in ORDER) ** 0.5
+        return [scale * (estimate(f) - 1.96 * se), scale * (estimate(f) + 1.96 * se)]
+
+    return {'points_per_stratum': n,
+            'matrix': [[sum(1 for _, r, m in points if r == i and m == j) for j in ORDER] for i in ORDER],
+            'overall': estimate(lambda r, m: r == m), 'overall_95ci': ci(lambda r, m: r == m),
+            'users': [ratio(lambda r, m: r == m == j, lambda r, m: m == j) for j in ORDER],
+            'producers': [ratio(lambda r, m: r == m == i, lambda r, m: r == i) for i in ORDER],
+            'adjusted_area_ha': [total * estimate(lambda r, m: r == i) for i in ORDER],
+            'adjusted_area_95ci_ha': [ci(lambda r, m: r == i, total) for i in ORDER]}
+
+
 def area_table(img, field):
     groups = ee.List(ee.Image.pixelArea().divide(10000).addBands(img).reduceRegion(
         reducer=ee.Reducer.sum().group(groupField=1, groupName=field),
@@ -119,6 +163,19 @@ m2 = s2.classify(rf).focalMode(1, 'square', 'pixels').rename('class')
 
 results['2020']['area_ha'] = area_table(m1, 'class')
 results['2025']['area_ha'] = area_table(m2, 'class')
+# Independent points. Same matrix the Code Editor prints (unfiltered classification), then the
+# filtered map that the areas come from, weighted by class area: the sample is stratified by
+# map class and water, 0.2 % of the campus, has a third of the points.
+for stack, final, year in ((s1, m1, 2020), (s2, m2, 2025)):
+    pts = hand_points(year)
+    results[str(year)]['independent_accuracy'] = accuracy(
+        stack.sampleRegions(collection=pts, properties=['class'], scale=10, tileScale=4)
+        .classify(rf).errorMatrix('class', 'classification', ORDER))
+    on_map = final.rename('map').sampleRegions(collection=pts, properties=['class', 'stratum'], scale=10, tileScale=4)
+    sampled = [(f['properties']['stratum'], f['properties']['class'], f['properties']['map'])
+               for f in on_map.getInfo()['features']]
+    areas = {g['class']: g['sum'] for g in results[str(year)]['area_ha']}
+    results[str(year)]['independent_area_weighted'] = area_weighted(sampled, [areas.get(c, 0) for c in ORDER])
 # Change has to survive a 1-pixel erosion. Strips under 30 m wide are roof edges
 # shifting between the two composites, not change.
 raw_change = m1.neq(m2)

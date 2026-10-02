@@ -98,19 +98,30 @@ The classes add up to 467.9 ha against the 469.2 ha polygon; the rest is boundar
 | Built-up | Open land | 2.0 | |
 | Water | any | 0.1 | |
 
-### Accuracy (Dynamic World holdout, not independent)
+### Accuracy
+
+Against the independent points (181 for 2020, 184 for 2025, `validation/`), on the filtered maps the areas come from.
+The sample is stratified by map class, so every estimate is weighted by map-class area (Olofsson et al. 2014);
+raw point counts would let water, 0.2 % of the campus and a third of the points, set the score.
 
 | | 2020 | 2025 |
 |---|---|---|
-| Overall accuracy | 0.842 | 0.844 |
-| Kappa | 0.70 | 0.73 |
-| Producer's accuracy (built / veg / open / water) | 0.65 / 0.94 / 0.70 / 1.00 | 0.76 / 0.91 / 0.68 / 1.00 |
-| User's accuracy (built / veg / open / water) | 0.79 / 0.86 / 0.78 / 1.00 | 0.76 / 0.90 / 0.71 / 1.00 |
+| Overall accuracy (95 % CI) | 0.61 (0.49-0.72) | 0.74 (0.65-0.84) |
+| User's accuracy (built / veg / open / water) | 0.49 / 0.61 / 0.89 / 0.84 | 0.41 / 0.84 / 0.86 / 0.74 |
+| Producer's accuracy (built / veg / open / water) | 0.49 / 0.92 / 0.22 / 0.15 | 0.76 / 0.91 / 0.18 / 0.89 |
+| Open land, mapped / estimated (95 % CI), ha | 32 / 146 (98-194) | 22 / 96 (56-135) |
 
 ![Confusion matrices](docs/img/05_accuracy.png)
 
-1671 training and 707 holdout pixels over both years. Water is perfect on only 11 and 13 holdout pixels, which says little.
-Built-up is the weak class in 2020: 29 of 89 built-up holdout pixels came out as vegetation.
+The map misses most open land. Lawns, sports fields and clearings among trees go to vegetation or built-up, so
+open land is mapped at about a fifth of its estimated area and vegetation is overstated, most in 2020.
+Built-up spreads onto lawns and courtyards next to buildings (user's accuracy 0.41-0.49).
+Producer's accuracy for water rests on a handful of points in large strata and means little.
+
+Holdout agreement with Dynamic World is 0.84 for both years (kappa 0.70 and 0.73, 707 holdout pixels).
+That is agreement with the training source, and the gap to the numbers above is the point of the independent check.
+The Code Editor prints the unweighted matrices on the unfiltered classification (OA 0.68 / 0.64, kappa 0.58 / 0.52);
+`scripts/run_pipeline.py` writes both to `results.json`.
 Most useful inputs (Random Forest importance): NDWI, B12, B11, B4, B8A.
 
 ## Running it
@@ -153,8 +164,9 @@ picks them up and prints the independent confusion matrices. See `validation/NOT
 
 ## Known limits
 
-- The accuracy above is agreement with Dynamic World, not with the ground. The hand-labelled points are what make it independent.
-- Change accuracy is not measured. Two maps at about 84 % each can give a change map near 70 %, so transitions of a few hectares are within error.
+- Open land is badly under-mapped (producer's accuracy about 0.2). The class-area changes of 1-10 ha in the table above are
+  smaller than the area error, so the change results rest on the large, checked transitions such as the south-east compound.
+- Change accuracy is not measured. Two maps at 0.61 and 0.74 give a change map well below either.
 - 10 m pixels mix roof and canopy along tree-lined roads and in the residential quarters. Most of the built-up / vegetation confusion is there.
 - The 30 m filter also drops real change narrower than 30 m, for example a single new building on a lawn.
 - Per-map class areas and the from-to table do not reconcile exactly, because the class areas still include the sub-30 m edge flips that the change filter drops.
@@ -181,6 +193,6 @@ TASKS.md                  who does what before the mid-term
 
 | Member | Roll no. | Contribution so far |
 |---|---|---|
-| Ashutosh Sharma | 23CS10005 | Earth Engine pipeline, from my first drafts (`gee/original/`) to `gee/lulc_pipeline.js`: cloud-masked Sentinel-2 composites, Dynamic World training labels, Random Forest, post-classification change. Diagnosed the first run (224 ha built-up, 139 ha of change) and fixed it: proportional sampling, one forest for both years, crops to open land, 30 m change filter. Python runner that reproduces every Console number. Both epochs run: class maps, areas, from-to table, accuracy. Change checked against NDVI. Figures, this README, the mid-term deck |
+| Ashutosh Sharma | 23CS10005 | Earth Engine pipeline, from my first drafts (`gee/original/`) to `gee/lulc_pipeline.js`: cloud-masked Sentinel-2 composites, Dynamic World training labels, Random Forest, post-classification change. Diagnosed the first run (224 ha built-up, 139 ha of change) and fixed it: proportional sampling, one forest for both years, crops to open land, 30 m change filter. Python runner that reproduces every Console number. Both epochs run: class maps, areas, from-to table, accuracy. Change checked against NDVI. Area-weighted independent accuracy and area estimates from the validation points (Olofsson / Stehman estimators). Figures, this README, the mid-term deck |
 | Krishnkant Sahu | 23CS10035 | Independent validation set: 365 points (181 for 2020, 184 for 2025, at least 25 per class per year), a stratified random sample on the map classes labelled on dated high-resolution imagery (WorldView-2, 15 Mar 2020; WorldView-3, 13 Jan 2024) after correcting its offset to Sentinel-2 (`gee/validation_points.js`, `validation/points.csv`). Labelling notes: imagery dates, rules, hard cases (south-east compound, shadows of the new buildings, algae-covered ponds, dark roofs) and a first look at the map errors (`validation/NOTES.md`). Sampling and export scripts, location figure |
 | Sanskar Sovitkar | 24CS10131 | |

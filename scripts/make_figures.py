@@ -91,24 +91,36 @@ bx.set_title(f'{changed:.1f} ha changed ({changed / r["campus_ha"] * 100:.1f} % 
              f'{before:.1f} ha before the 30 m filter', fontsize=12, color=INK, loc='left')
 finish(fig, '04_change_2020_2025.png', 'Change 2020 to 2025')
 
-fig, axes = plt.subplots(1, 2, figsize=(12, 5.6))
+fig, axes = plt.subplots(2, 2, figsize=(12, 11))
 short = ['Built', 'Veg', 'Open', 'Water']
-for ax, year in zip(axes, ('2020', '2025')):
-    acc = r[year]['dw_holdout_accuracy']
-    m = acc['matrix']
-    ax.imshow(m, cmap='Greens')
-    for i in range(4):
-        for j in range(4):
-            ax.text(j, i, m[i][j], ha='center', va='center', fontsize=12,
-                    color='white' if m[i][j] > 100 else INK)
-    ax.set_xticks(range(4), short)
-    ax.set_yticks(range(4), short)
-    ax.set_xlabel('predicted')
-    ax.set_ylabel('Dynamic World reference')
-    ax.set_title(f'{year}: OA {acc["overall"]:.3f}, kappa {acc["kappa"]:.2f}', color=INK)
-    ax.spines[:].set_visible(False)
-fig.text(0.5, 0.07, f'Holdout agreement with Dynamic World ({r["holdout"]} pixels over both years). '
-         'Not independent; hand-labelled points come next.', ha='center', fontsize=11, color=MUTED)
-fig.subplots_adjust(left=0.08, right=0.98, top=0.84, bottom=0.2, wspace=0.35)
-finish(fig, '05_accuracy.png', 'Classification accuracy (confusion matrices)')
+for row, (key, ylabel) in enumerate((('independent_area_weighted', 'hand-labelled reference'),
+                                      ('dw_holdout_accuracy', 'Dynamic World reference'))):
+    for ax, year in zip(axes[row], ('2020', '2025')):
+        acc = r[year][key]
+        m = acc['matrix']
+        top = max(map(max, m))
+        ax.imshow(m, cmap='Greens')
+        for i in range(4):
+            for j in range(4):
+                ax.text(j, i, m[i][j], ha='center', va='center', fontsize=12,
+                        color='white' if m[i][j] > top * 0.6 else INK)
+        ax.set_xticks(range(4), short)
+        ax.set_yticks(range(4), short)
+        ax.set_xlabel('map')
+        ax.set_ylabel(ylabel)
+        if row == 0:
+            lo, hi = acc['overall_95ci']
+            ax.set_title(f'{year}: {sum(map(sum, m))} points\nOA {acc["overall"]:.2f} (95 % CI {lo:.2f}-{hi:.2f}), area-weighted',
+                         color=INK, fontsize=13)
+        else:
+            ax.set_title(f'{year}: DW holdout\nOA {acc["overall"]:.2f}, kappa {acc["kappa"]:.2f}', color=INK, fontsize=13)
+        ax.spines[:].set_visible(False)
+fig.subplots_adjust(left=0.1, right=0.97, top=0.9, bottom=0.12, wspace=0.3, hspace=0.6)
+notes = ('Independent: stratified random points labelled on WorldView imagery (Krishnkant Sahu). '
+         'Point counts; OA weighted by map-class area.',
+         f'Dynamic World holdout ({r["holdout"]} pixels over both years): agreement with the training source, '
+         'not independent.')
+for row, note in enumerate(notes):
+    fig.text(0.5, axes[row][0].get_position().y0 - 0.075, note, ha='center', fontsize=10.5, color=MUTED)
+finish(fig, '05_accuracy.png', 'Classification accuracy')
 print(sorted(p.name for p in OUT.iterdir()))
