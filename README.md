@@ -101,7 +101,7 @@ quote those for class totals. The classes add up to 468.0 ha against the 469.2 h
 
 | From | To | ha | What it is on the ground |
 |---|---|---|---|
-| Open land | Vegetation | 37.1 | East-end grassland growing into scrub: 31.6 ha of it is in the south-east quarter. Median winter NDVI 0.38 to 0.50, pre-monsoon 0.46 to 0.56, while pixels that s[...]
+| Open land | Vegetation | 37.1 | East-end grassland growing into scrub: 31.6 ha of it is in the south-east quarter. Median winter NDVI 0.38 to 0.50, pre-monsoon 0.46 to 0.56, while pixels that s[...] |
 | Open land | Built-up | 13.1 | Mostly the south-east construction compound, scrub and tracks in 2020; NDVI 0.33 to 0.15 |
 | Built-up | Vegetation | 11.8 | Pixels that really got greener (NDVI 0.34 to 0.44), but the 2020 "built-up" label there is largely canopy over roofs. Read as greening, not demolition |
 | Vegetation | Built-up | 5.9 | New buildings on wooded plots; NDVI 0.46 to 0.20 |
@@ -169,8 +169,7 @@ check which parts of the chosen one matter:
 | open land at 450 + pre-monsoon + shrub | 0.68 | 0.76 |
 | used, with open land at 600 | 0.675 | 0.795 |
 
-Chosen on the odd half by a rule fixed before the runs (best mean OA there); two variants do a little better on the even half, which is the noise below. Differences under about 0.05 are within th[...]
-90 points, so the honest claim is "better on both halves", not the third decimal.
+Chosen on the odd half by a rule fixed before the runs (best mean OA there); two variants do a little better on the even half, which is the noise below. Differences under about 0.05 are within the noise; with 90 points, the honest claim is "better on both halves", not the third decimal.
 
 ## Running it
 
@@ -246,6 +245,6 @@ TASKS.md                  who does what before the mid-term
 
 | Member | Roll no. | Contribution so far |
 |---|---|---|
-| Ashutosh Sharma | 23CS10005 | Earth Engine pipeline, from my first drafts (`gee/original/`) to `gee/lulc_pipeline.js`: cloud-masked Sentinel-2 composites, Dynamic World training labels, Random [...]
-| Krishnkant Sahu | 23CS10035 | Independent validation set: 365 points (181 for 2020, 184 for 2025, at least 25 per class per year), a stratified random sample on the map classes labelled on date[...]
-| Sanskar Sovitkar | 24CS10131 | Study area figure: IIT Kharagpur campus boundary (OSM way 52435606, 184 vertices, 469.2 ha), converted to KML and drawn over Google Earth imagery in Google Earth Pro, with north arrow and scale bar. Literature review of six papers on Sentinel-2 / Random Forest land cover mapping and change detection (Tikuye et al. 2023, Abdi 2020, Alonso et al. 2021, Rynkiewicz et al. 2023, Jagannathan et al. 2025, Zhang et al. 2021), each compared by data, classes, method and accuracy. Noted that the reported accuracies (about 73 to 98 %) are not directly comparable, and that these studies work at regional or city scale rather than on a single campus. Added the literature/ folder to the repository with the comparison table, references with DOI links, and PDFs only for papers whose open-access licence allows redistribution. Background, study area and literature slides of the mid-term deck. |
+| Ashutosh Sharma | 23CS10005 | Earth Engine pipeline, from my first drafts (`gee/original/`) to `gee/lulc_pipeline.js`: cloud-masked Sentinel-2 composites, Dynamic World training labels, Random Forest classification, post-classification change detection, and running the full campus pipeline. |
+| Krishnkant Sahu | 23CS10035 | Independent validation set: 365 points (181 for 2020, 184 for 2025, at least 25 per class per year), a stratified random sample on the map classes labelled on dated high-resolution imagery; accuracy assessment and validation notes in `validation/`. |
+| Sanskar Sovitkar | 24CS10131 | |
